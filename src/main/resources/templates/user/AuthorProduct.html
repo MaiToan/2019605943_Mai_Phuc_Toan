@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8"/>
+  <title>Detail Author</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon"/>
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet"/>
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Flaticon Font -->
+  <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"/>
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet"/>
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<!-- Navbar Start -->
+<div class="container-fluid bg-light position-relative shadow">
+  <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+    <a href="/Home" class="navbar-brand font-weight-bold text-secondary" style="font-size: 42px">
+      <img style="max-width: 80px; margin-bottom: 8px" src="../../../upload/static/images/gallery/Logo.png">
+      <span class="text-primary">TOANSACH</span>
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+      <div class="navbar-nav font-weight-bold mx-auto py-0">
+        <a href="/Home" class="nav-item nav-link">Home</a>
+        <a href="/products" class="nav-item nav-link">Product</a>
+        <a href="/authors" class="nav-item nav-link active">Authors</a>
+        <a href="/about" class="nav-item nav-link">About</a>
+        <div class="nav-item dropdown">
+          <a href="/categories" class="nav-link dropdown-toggle" data-toggle="dropdown">Product
+            Catalog</a>
+          <div class="dropdown-menu rounded-0 m-0">
+            <a href="/categories" class="dropdown-item font-weight-bold">List Product Catalog</a>
+            <div th:each="obj:${categories}" th:object="${obj}">
+              <a class="dropdown-item" th:text="*{getName()}" th:href="@{'/category/' + *{getId()}}"></a>
+            </div>
+          </div>
+        </div>
+
+        <a href="contact.html" class="nav-item nav-link pr-5">Contact</a>
+        <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/products"><i class="fa fa-search" style="font-size:25px"></i></a>
+        <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/cart"><i
+                class="fa fa-cart-plus"
+                style="font-size:25px; padding-right: 18px"><span th:if="${size_cart>0}" style="color: #17a2b8"
+                                                                  th:text="'(' + ${size_cart} + ')'"></span></i></a>
+        <a th:if="${user.getAvatar() == null}" class="nav-item nav-link" style="color: rgb(84, 84, 84);" href="/account"><i class="fa fa-user" style="font-size:25px"></i></a>
+        <a class="box-avatar-user" href="/account" th:if="${user.getAvatar() != null}">
+          <img class="img-avatar-user" th:src="@{'../../../upload/static/images/gallery/' + ${user.getAvatar()}}">
+          <h6 class="m-0 pl-2" th:text="${user.getName()}"></h6>
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+<div style="background-image: url(../../../upload/static/images/gallery/BackgroundAuthor.jpg)" class="BackGround-Header">
+  <h1>Our Author Detail</h1>
+  <p style="font-size: 20px">Home - Our Author Detail</p>
+</div>
+<div class="colorlib-product">
+  <div class="container">
+    <div class="text-center pb-2">
+      <p class="section-title px-5">
+        <span class="px-2">Our Product Author</span>
+      </p>
+      <h1 class="mb-4">Author</h1>
+    </div>
+    <!-- Team Start -->
+    <div class="container-fluid">
+      <div class="container">
+        <div style="justify-content: center; flex-direction: column ; align-items: center"  th:object="${author}" class="row">
+          <div  class="col-md-6 col-lg-3 text-center team mb-3">
+            <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
+              <img class="img-fluid w-100" th:src="@{'../../../upload/static/images/gallery/' + *{Avatar} }" alt=""/>
+            </div>
+            <h4 th:text="*{Name}"></h4>
+            <i th:text="*{Address}"></i>
+          </div>
+          <div  class="col-md-8 col-lg-6 text-center team mb-5">
+            <span class="text-" th:text="*{Description}"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="product_section layout_padding">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2 class="text-center">
+        Author <span>products</span>
+      </h2>
+    </div>
+    <div class="box_search container-fluid ml-2 mr-2">
+      <form method="get" class="row flex-row flex-nowrap">
+        <input class="col-6" type="text" name="keyword" th:value="${keyword}" placeholder="Enter Anything...">
+        <select style="font-size: 1rem; padding: 0" class="col-2 ml-1" id="sort" name="sort" size="1">
+          <option value="" style="color: #ccc">--Choose type sort--</option>
+          <option value="sort_price">Sort by price</option>
+          <option value="sort_sold">Sort by products sold</option>
+        </select>
+        <input type="submit" class="btn-success col-1 py-1 ml-1" value="Search">
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-9">
+        <div class="row">
+          <div style="min-width: 255px" class="col-sm-6 col-md-4 col-lg-3" th:each="obj:${LsProduct}"
+               th:object="${obj}">
+            <div class="box">
+              <div class="option_container">
+                <div class="options">
+                  <a th:href="@{'../DetailProduct/' + *{getId()}}" class="option1">
+                    View
+                  </a>
+                  <form th:action="@{/cart}" method="POST">
+                    <input type="hidden" name="AddCart" th:value="*{getId()}">
+                    <input type="hidden" name="URL" th:value="${url}">
+                    <input type="hidden" name="Number" th:value="1">
+                    <input class="option2 btn_submit" type="submit" value="Add To Cart">
+                  </form>
+                </div>
+              </div>
+              <div class="img-box">
+                <img loading="lazy" th:src="@{'../../../upload/static/images/gallery/' + *{Image} }" alt="">
+              </div>
+              <div class="detail-box flex-column justify-content-center">
+                <h5 th:text="*{Name}"></h5>
+                <h6 style="color: crimson ; font-size: 1.4rem" th:text="'$' + *{Price - Sale}"></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <h4 class="text-center mt-5" th:if="${TotalPages < 1 }">No Products math result</h4>
+    <nav th:if="${TotalPages > 1 }" aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-5">
+        <li th:if="${curentPage > 1}" class="page-item"><a class="page-link"
+                                                           th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${curentPage - 1}}">Previous</a>
+        </li>
+        <li th:if="${TotalPages < 3}" th:each="i:${#numbers.sequence(1, TotalPages)}"
+            th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+          <a class="page-link" th:text="${i}"
+             th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${i}}">1</a>
+        </li>
+
+        <li th:if="${TotalPages >= 3 &&(curentPage < 3 || curentPage == TotalPages)}"
+            th:each="i:${#numbers.sequence(1, 3)}" th:classappend="${curentPage == i ? 'active':''}"
+            class="page-item">
+          <a class="page-link" th:text="${i}"
+             th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${i}}">1</a>
+        </li>
+
+        <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage < TotalPages - 1}"
+            th:each="i:${#numbers.sequence(curentPage - 1, curentPage + 1)}"
+            th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+          <a class="page-link" th:text="${i}"
+             th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${i}}">1</a>
+        </li>
+
+        <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage == TotalPages - 1}"
+            th:each="i:${#numbers.sequence(curentPage - 1, curentPage)}"
+            th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+          <a class="page-link" th:text="${i}"
+             th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${i}}">1</a>
+        </li>
+        <li th:if="${TotalPages > 3}" class="page-item"><a class="page-link" href="#">...</a></li>
+
+        <li th:if="${TotalPages > 3}" th:classappend="${curentPage == TotalPages ? 'active':''}"
+            class="page-item">
+          <a class="page-link" th:text="${TotalPages}"
+             th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${TotalPages}}">1</a>
+        </li>
+        <li th:if="${curentPage < TotalPages}" class="page-item"><a class="page-link"
+                                                                    th:href="@{${(keyword != null && keyword != '') || (option_sort != null && option_sort != '') ? '?keyword='+keyword+'&'+'sort='+option_sort+'&':'?'}+'pageNo='+${curentPage + 1}}">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+<!-- Footer Start -->
+<div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+  <div class="row pt-5">
+    <div class="col-lg-3 col-md-6 mb-5">
+      <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
+         style="font-size: 40px; line-height: 40px">
+        <i class="flaticon-043-teddy-bear"></i>
+        <span th:text="${store.getName()}" class="text-white">TOANSACH</span>
+      </a>
+      <p th:text="${store.getDescription()}">
+      </p>
+      <div class="d-flex justify-content-start mt-4">
+        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px"
+           href="#"><i class="fab fa-twitter"></i></a>
+        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px"
+           href="#"><i class="fab fa-facebook-f"></i></a>
+        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px"
+           href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px"
+           href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-5">
+      <h3 class="text-primary mb-4">Get In Touch</h3>
+      <div class="d-flex">
+        <i style="color: #17a2b8" class="fas fa-map-marked"></i>
+        <div class="pl-3">
+          <h5 class="text-white">Address</h5>
+          <p th:text="${store.getAddress()}" >123 Street, New York, USA</p>
+        </div>
+      </div>
+      <div class="d-flex">
+        <h4 class="fa fa-envelope text-primary"></h4>
+        <div class="pl-3">
+          <h5 class="text-white">Email</h5>
+          <p th:text="${store.getEmail()}">info@example.com</p>
+        </div>
+      </div>
+      <div class="d-flex">
+        <i style="color: #17a2b8" class="fas fa-phone"></i>
+        <div class="pl-3">
+          <h5 class="text-white">Phone</h5>
+          <p th:text="${store.getPhone()}" >+012 345 67890</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-5">
+      <h3 class="text-primary mb-4">Quick Links</h3>
+      <div class="d-flex flex-column justify-content-start">
+        <a class="text-white mb-2" href="/Home"><i class="fa fa-angle-right mr-2"></i>Home</a>
+        <a class="text-white mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+        <a class="text-white mb-2" href="/authors"><i class="fa fa-angle-right mr-2"></i>Author</a>
+        <a class="text-white mb-2" href="/categories"><i class="fa fa-angle-right mr-2"></i>Categories</a>
+        <a class="text-white" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-5">
+      <h3 class="text-primary mb-4">Newsletter</h3>
+      <form action="">
+        <div class="form-group">
+          <input type="text" class="form-control border-0 py-4" placeholder="Your Name" required="required" />
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control border-0 py-4" placeholder="Your Email" required="required" />
+        </div>
+        <div>
+          <button class="btn btn-primary btn-block border-0 py-3" type="submit">
+            Submit Now
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{js/easing.js}"></script>
+<script th:src="@{js/easing.min.js}"></script>
+<script th:src="@{js/owl.carousel.min.js}"></script>
+<script th:src="@{js/lightbox.min.js}"></script>
+<script th:src="@{js/lightbox.js}"></script>
+<!-- Contact Javascript File -->
+<script th:src="@{js/jqBootstrapValidation.min.js}"></script>
+<script th:src="@{js/contact.js}"></script>
+<script th:src="@{js/main.js}"></script>
+<script th:src="@{/js/toast.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Admin Order Detail</title>
+<!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+<!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome/css/fontawesome-all.min.css}">
+    <!-- animation css -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/animation/css/animate.min.css}">
+
+
+    <!-- vendor css -->
+    <link rel="stylesheet" th:href="@{/css/HomeAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/OrderDetail.css}">
+</head>
+
+<body class="">
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+                <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="../../admin/Home" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Orders</label>
+                </li>
+                <li class="nav-item active">
+                    <a href="../../admin/ListOrders" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">List Orders</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Users</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListUser" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">List Users</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Products</label>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-shopping-bag"></i></span><span class="pcoded-mtext">Related to products</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="nav-item">
+                            <a href="../../admin/ListProducts" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-book"></i></span><span class="pcoded-mtext">List Books</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListAuthor" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-user-graduate"></i></span><span
+                                    class="pcoded-mtext">List Authors</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListCategory" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-list"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Pages</label>
+                </li>
+                <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i
+                        class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="#" class="nav-link"><span class="pcoded-micon"><i
+                        class="fas fa-store-alt"></i>
+                </span><span class="pcoded-mtext">Store</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
+
+<!-- [ Header ] start -->
+<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="index.html" class="b-brand">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+            <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+        </a>
+    </div>
+    <a class="mobile-menu" id="mobile-header" href="#">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse">
+        <a href="#" class="mob-toggler"></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <div class="main-search open">
+
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-settings"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head">
+                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span>John Doe</span>
+                        </div>
+                        <ul class="pro-body">
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                                out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5>Home</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                    class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#">Detail order</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sessions-section start -->
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-9 col-md-10 col-sm-12 box-Detail p-3">
+                                    <div class="col-12 box-header">
+                                        <div class="header-info">
+                                            <h5>Order ID: <span th:text="${1000000 + Order.getId()}">#434556</span></h5>
+                                            <h6 style="color: #7c7c7c" th:text="*{Order.getOrderDateFormat()}">Mon, july 2020</h6>
+                                            <span th:if="${Order.getPaymentMethod() == 1}"
+                                                  style="background-color: #3b98ff; padding: 2px 5px; color: #fff; border-radius: 2px">Banking</span>
+                                            <span th:if="${Order.getPaymentMethod() == 2}"
+                                                  style="background-color: #3b98ff; padding: 2px 5px; color: #fff; border-radius: 2px">Cash</span>
+                                        </div>
+                                        <div class="header-status">
+                                            <form th:action="@{/admin/ChangeStatus}" method="post" th:object="${Order}">
+                                                <input type="hidden" name="ID" th:value="*{getId()}">
+                                                <select th:field="*{status}" class="p-1">
+                                                    <option value="0">Cancelled</option>
+                                                    <option value="1">Pending</option>
+                                                    <option value="2">Confirm</option>
+                                                    <option value="3">Shipping</option>
+                                                    <option value="4">Delivery</option>
+                                                </select>
+                                                <input class="btn btn-sm btn-info" type="submit" value="Change">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 box_info_body">
+                                        <div class="row">
+                                            <div class="col-5">
+                                                <div class="Info_cus">
+                                                    <img th:if="${Order.getUser_order().getAvatar() != null}"
+                                                         th:src="@{'/picture/' + ${Order.getUser_order().getAvatar()}}" alt="">
+                                                    <img th:if="${Order.getUser_order().getAvatar() == null}"
+                                                         src="/images/gallery/NormalAvatar.jpg" alt="">
+                                                    <div class="text_info_cus">
+                                                        <h5>Customer</h5>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Name:</span>
+                                                            <span th:text="${Order.getUser_order().getName()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Email:</span>
+                                                            <span th:text="${Order.getUser_order().getEmail()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Phone:</span>
+                                                            <span th:text="${Order.getUser_order().getPhone()}"></span>
+                                                        </div>
+<!--                                                        <div>Name: <span th:text="${Order.getUser_order().getName()}">Maria aniston</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div>Email: <span th:text="${Order.getUser_order().getEmail()}">maiphuctoan867@gmail.com</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div>Phone: <span th:text="${Order.getUser_order().getPhone()}">09085944967</span>-->
+<!--                                                        </div>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-7">
+                                                <div class="Info_cus">
+                                                    <img src="../../../upload/static/images/gallery/orderCart.png" alt="">
+                                                    <div class="text_info_cus">
+                                                        <h5>Order Infomation</h5>
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">Name Order:</span>
+                                                            <span th:text="${Order.getName()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">Phone Order:</span>
+                                                            <span th:text="${Order.getPhone()}"></span>
+                                                        </div>
+<!--                                                        <div>Name Order: <span th:text="${Order.getName()}">Maria aniston</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div>Phone Order: <span th:text="${Order.getPhone()}">09085944967</span>-->
+<!--                                                        </div>-->
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">Country Address:</span>
+                                                            <span th:text="${Order.getCountry()}"></span>
+                                                        </div>
+<!--                                                        <div>Country Address: <span th:text="${Order.getCountry()}">VietNam</span>-->
+<!--                                                        </div>-->
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">City Address:</span>
+                                                            <span th:text="${Order.getCity()}"></span>
+                                                        </div>
+<!--                                                        <div>City Address: <span-->
+<!--                                                                th:text="${Order.getCity()}">Ninh Binh</span></div>-->
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">District Address:</span>
+                                                            <span th:text="${Order.getDistrict()}"></span>
+                                                        </div>
+<!--                                                        <div>District Address: <span th:text="${Order.getDistrict()}">Yen Mo</span>-->
+<!--                                                        </div>-->
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">Detail Address:</span>
+                                                            <span th:text="${Order.getAddress()}"></span>
+                                                        </div>
+<!--                                                        <div>Detail Address: <span th:text="${Order.getAddress()}">Yen Nhan, Yen Mo, Ninh Binh</span>-->
+<!--                                                        </div>-->
+                                                        <div >
+                                                            <span style="width: 140px; display: inline-block; color: #787878">Note:</span>
+                                                            <textarea th:if="${Order.getNote() != ''}" th:text="${Order.getNote()}" style="max-width: 200px"
+                                                                      rows="3" cols="35" name="comment"></textarea>
+                                                        </div>
+<!--                                                        <textarea th:if="${Order.getNote() != ''}" th:text="${Order.getNote()}" style="max-width: 200px"-->
+<!--                                                                  rows="4" cols="35" name="comment"></textarea>-->
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="card table-card">
+                                                    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center"
+                                                         class="card-header">
+                                                        <h5>List Product</h5>
+                                                    </div>
+                                                    <div class="card-body px-0 py-0">
+                                                        <div class="table-responsive">
+                                                            <div class="session-scroll" style="position:relative;">
+                                                                <table class="table table-hover m-b-0">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th><span>Product ID</span></th>
+                                                                        <th><span>Image </span></th>
+                                                                        <th><span>Name </span>
+                                                                        </th>
+                                                                        <th><span>Quantity</span>
+                                                                        </th>
+                                                                        <th><span>Price</span>
+                                                                        </th>
+                                                                        <th><span>Total</span>
+                                                                        </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr th:each="obj:${orderDetails}"
+                                                                        th:object="${obj}">
+                                                                        <td th:text="*{getProductOrder().getId()}"></td>
+                                                                        <td><img
+                                                                                style="max-width: 40px; border: 1px solid #ccc"
+                                                                                th:src="@{'/picture/' + *{getProductOrder().getImage()}}"
+                                                                                alt=""></td>
+                                                                        <td th:text="*{getProductOrder().getName()}"></td>
+                                                                        <td th:text="*{getQuantity()}"></td>
+                                                                        <td th:text="*{'$'+getUnitPrice()}"></td>
+                                                                        <td th:text="*{'$'+getUnitPrice()*getQuantity()}"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Total Order:</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td th:text="${'$'+Order.getDisCount()}"></td>
+                                                                    </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sessions-section end -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/pcoded.min.js"></script>
+
+
+</body>
+
+</html>

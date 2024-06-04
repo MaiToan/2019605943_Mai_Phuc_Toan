@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Detail Product</title>
+    <!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome/css/fontawesome-all.min.css}">
+    <!-- animation css -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/animation/css/animate.min.css}">
+
+
+    <!-- vendor css -->
+    <link rel="stylesheet" th:href="@{/css/HomeAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/OrderDetail.css}">
+    <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/DetailProduct.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+        @media (min-width: 992px) {
+            .col-lg-5 {
+                flex: 0 0 41.66667%;
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .offset-lg-1 {
+                margin-left: 0;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .product_image_area {
+                padding-top: 0;
+            }
+        }
+
+        .product_image_area .container {
+            justify-content: space-around;
+        }
+
+        @media (max-width: 1200px) {
+            .btn-product {
+                flex-direction: column;
+                width: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="">
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt=""
+                     class="logo images">
+                <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt=""
+                     class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="../../admin/Home" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Orders</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListOrders" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">List Orders</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Users</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListUser" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">List Users</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Products</label>
+                </li>
+                <li class="nav-item pcoded-hasmenu active">
+                    <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-shopping-bag"></i></span><span class="pcoded-mtext">Related to products</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="nav-item active">
+                            <a href="../../admin/ListProducts" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-book"></i></span><span class="pcoded-mtext">List Books</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListAuthor" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-user-graduate"></i></span><span
+                                    class="pcoded-mtext">List Authors</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListCategory" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-list"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Pages</label>
+                </li>
+                <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i
+                        class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="#" class="nav-link"><span class="pcoded-micon"><i
+                        class="fas fa-store-alt"></i>
+                </span><span class="pcoded-mtext">Store</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- [ Header ] start -->
+<header style="padding: 0" class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="index.html" class="b-brand">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt=""
+                 class="logo images">
+            <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt=""
+                 class="logo-thumb images">
+        </a>
+    </div>
+    <a class="mobile-menu" id="mobile-header" href="#">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-settings"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head">
+                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius"
+                                 alt="User-Profile-Image">
+                            <span>John Doe</span>
+                        </div>
+                        <ul class="pro-body">
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                                out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container position-relative">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5>Home</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                    class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#">Detail Product</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="width: 100% ; right: 15px; z-index: 1000"
+                             class="d-flex justify-content-end position-absolute btn-product">
+                            <div class=" rounded bg-warning text-light m-2 p-1 px-2">
+                                <a class="text-light btn-sm " th:href="@{'/admin/edit-product/'+ *{id}}"><i
+                                        class="fas fa-edit"></i> Edit
+                                    Product</a>
+                            </div>
+                            <div class="box-btn bg-danger rounded m-2 p-1 px-2">
+                                <form th:action="@{/admin/delete-product}" method="post">
+                                    <input name="id" th:value="${product.getId()}" type="hidden">
+                                    <button onclick="return confirm('Do you want to delete product ?');" type="submit"
+                                            class="btn-sm bg-danger text-light "><i class="fas fa-trash-alt mr-1"></i>
+                                        Delete Product
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- sessions-section start -->
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-10 col-sm-12 box-Detail p-3">
+                                    <div class="product_image_area">
+                                        <div class="container">
+                                            <div class="position-relative row s_product_inner ">
+                                                <div style="max-width: 100%" class="col-lg-6">
+                                                    <div class="owl-carousel owl-theme s_Product_carousel">
+                                                        <div class="single-prd-item">
+                                                            <img class="img-fluid"
+                                                                 th:src="@{'../../../upload/static/images/gallery/' + *{product.Image} }"
+                                                                 alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="set_border col-lg-5 offset-lg-1">
+                                                <div th:object="${product}" class="s_product_text">
+                                                    <h3 th:text="*{Name}"></h3>
+                                                    <ul class="list mb-3">
+                                                        <li>
+                                                            <span th:if="${avgRate != 0}" th:text="${avgRate}"></span>
+                                                            <span th:if="${avgRate == 0}">5</span><i class="fa fa-star mx-1 mr-3"></i>(<span
+                                                                th:text="${comments.size()}"></span>
+                                                            Rates)
+                                                        </li>
+                                                    </ul>
+                                                    <div class="d-flex align-items-center">
+                                                        <h2 class="m-0 mr-3" th:text="'$' + *{Price - Sale}"></h2>
+                                                        <span th:if="*{Sale != null || Sale > 0}"
+                                                              style="text-decoration: line-through"
+                                                              th:text="'$' + *{Price}"></span>
+                                                    </div>
+
+                                                    <p id="txt_hidden_product" style="min-width: 450px;"
+                                                       th:text="*{Description}"></p>
+                                                    <ul class="list">
+                                                        <div style="display: flex; justify-content: start; align-items: center">
+                                                            <li style="margin-bottom: 0; margin-right: 25px"
+                                                                class="mt-3"><span
+                                                                    class="font-weight-bold">Category : </span><a
+                                                                    class="active"
+                                                                    th:href="@{'/category/' + *{getCategories().id}}"
+                                                                    th:text="*{getNameCategory()}"></a>
+                                                            </li>
+                                                            <li class="mt-3">
+                                                                <span class="font-weight-bold">Authors : </span>
+
+                                                                <span th:each="obj:${authors}" th:object="${obj}">
+                                                                  <a style="margin: 5px" class="active"
+                                                                     th:href="@{'/author/' + *{getAuthorProduct().getId()}}"
+                                                                     th:text="*{getAuthorProduct().getName()}"></a>
+                                                                </span>
+                                                            </li>
+                                                        </div>
+                                                        <li class="mt-3"><span
+                                                                class="font-weight-bold">Availibility : </span><a
+                                                                class="ml-3"
+                                                                th:text="*{ProductNumber}"></a>
+                                                        </li>
+                                                        <li class="mt-3"><span
+                                                                class="font-weight-bold">Product sold : </span><a
+                                                                class="ml-3"
+                                                                th:text="*{ProductSold}"></a>
+                                                        </li>
+                                                    </ul>
+                                                    <form th:action="@{/cart}" method="POST">
+                                                        <input type="hidden" name="AddCart" th:value="*{getId()}">
+                                                        <input type="hidden" name="URL" th:value="${url}">
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="product_description_area">
+                            <div class="container">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active show" id="review-tab" data-toggle="tab" href="#review"
+                                           role="tab"
+                                           aria-controls="review" aria-selected="true">Reviews</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                           aria-controls="home"
+                                           aria-selected="false">Description</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <p th:text="${product.Description}"></p>
+                                    </div>
+
+                                    <div class="tab-pane fade active show" id="review" role="tabpanel"
+                                         aria-labelledby="review-tab">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="row total_rate">
+                                                    <div class="col-6">
+                                                        <div class="box_total">
+                                                            <h5>Overall</h5>
+                                                            <h4 th:text="${avgRate}"></h4>
+                                                            <h6>(<span th:text="${comments.size()}"></span> Reviews)
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="rating_list">
+                                                            <h3>Based on <span th:text="${comments.size()}"></span>
+                                                                Reviews</h3>
+                                                            <ul class="list">
+                                                                <li><a href="#">5 Star <i class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i> ( <span
+                                                                        th:text="${Five}"></span> )</a></li>
+                                                                <li><a href="#">4 Star <i class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i> ( <span
+                                                                        th:text="${Four}"></span> )</a></li>
+                                                                <li><a href="#">3 Star <i class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i> ( <span
+                                                                        th:text="${Three}"></span> )</a></li>
+                                                                <li><a href="#">2 Star <i class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i> ( <span
+                                                                        th:text="${Two}"></span> )</a></li>
+                                                                <li><a href="#">1 Star <i class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i><i
+                                                                        class="fa fa-star"></i> ( <span
+                                                                        th:text="${One}"></span> )</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review_list">
+                                                    <div th:each="obj:${lsComment}" th:object="${obj}"
+                                                         class="review_item">
+                                                        <div class="media">
+                                                            <div style="flex-grow: 1" class="d-flex">
+                                                                <img th:if="*{user.Avatar != null || user.Avatar != '' }"
+                                                                     th:src="@{'../../../upload/static/images/gallery/' + *{user.Avatar} }"
+                                                                     alt="">
+                                                                <img th:if="*{user.Avatar == null || user.Avatar == '' }"
+                                                                     src="/images/gallery/author2.jpg" alt="">
+                                                            </div>
+                                                            <div style="flex-grow: 40; display: flex; justify-content: space-between !important; align-items: center; padding-right: 10px">
+                                                                <div style="margin: 0" class="media-body">
+                                                                    <h4 th:text="*{user.Name}">Blake Ruiz</h4>
+                                                                    <i class="fa fa-star"></i>
+                                                                    <i th:if="*{RateNumber >= 2}" class="fa fa-star"></i>
+                                                                    <i th:if="*{RateNumber < 2}" class="far fa-star"></i>
+                                                                    <i th:if="*{RateNumber >= 3}" class="fa fa-star"></i>
+                                                                    <i th:if="*{RateNumber < 3}" class="far fa-star"></i>
+                                                                    <i th:if="*{RateNumber >= 4}" class="fa fa-star"></i>
+                                                                    <i th:if="*{RateNumber < 4}" class="far fa-star"></i>
+                                                                    <i th:if="*{RateNumber >= 5}" class="fa fa-star"></i>
+                                                                    <i th:if="*{RateNumber < 5}" class="far fa-star"></i>
+                                                                </div>
+                                                                <a th:if="*{getTopComment() == 1}" th:href="@{'/admin/handler-top-comment/'+ *{getId()}}"><i class="fas fa-thumbs-up"></i></a>
+                                                                <a th:if="*{getTopComment() != 1}" th:href="@{'/admin/handler-top-comment/'+ *{getId()}}"> <i class="far fa-thumbs-up"></i></a>
+                                                            </div>
+
+                                                        </div>
+                                                        <p th:text="*{Content}"></p>
+                                                    </div>
+                                                </div>
+
+                                                <h4 class="text-center mt-5" th:if="${TotalPages < 1 }">No comment of
+                                                    this book</h4>
+                                                <nav th:if="${TotalPages > 1 }" aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center mt-5">
+                                                        <li th:if="${curentPage > 1}" class="page-item"><a
+                                                                class="page-link"
+                                                                th:href="@{'?pageNo='+${curentPage - 1}}">Previous</a>
+                                                        </li>
+                                                        <li th:if="${TotalPages < 3}"
+                                                            th:each="i:${#numbers.sequence(1, TotalPages)}"
+                                                            th:classappend="${curentPage == i ? 'active':''}"
+                                                            class="page-item">
+                                                            <a class="page-link" th:text="${i}"
+                                                               th:href="@{'?pageNo='+${i}}">1</a>
+                                                        </li>
+
+                                                        <li th:if="${TotalPages >= 3 &&(curentPage < 3 || curentPage == TotalPages)}"
+                                                            th:each="i:${#numbers.sequence(1, 3)}"
+                                                            th:classappend="${curentPage == i ? 'active':''}"
+                                                            class="page-item">
+                                                            <a class="page-link" th:text="${i}"
+                                                               th:href="@{'?pageNo='+${i}}">1</a>
+                                                        </li>
+
+                                                        <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage < TotalPages - 1}"
+                                                            th:each="i:${#numbers.sequence(curentPage - 1, curentPage + 1)}"
+                                                            th:classappend="${curentPage == i ? 'active':''}"
+                                                            class="page-item">
+                                                            <a class="page-link" th:text="${i}"
+                                                               th:href="@{'?pageNo='+${i}}">1</a>
+                                                        </li>
+
+                                                        <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage == TotalPages - 1}"
+                                                            th:each="i:${#numbers.sequence(curentPage - 1, curentPage)}"
+                                                            th:classappend="${curentPage == i ? 'active':''}"
+                                                            class="page-item">
+                                                            <a class="page-link" th:text="${i}"
+                                                               th:href="@{'?pageNo='+${i}}">1</a>
+                                                        </li>
+                                                        <li th:if="${TotalPages > 3}" class="page-item"><a
+                                                                class="page-link"
+                                                                href="#">...</a>
+                                                        </li>
+
+                                                        <li th:if="${TotalPages > 3}"
+                                                            th:classappend="${curentPage == TotalPages ? 'active':''}"
+                                                            class="page-item">
+                                                            <a class="page-link" th:text="${TotalPages}"
+                                                               th:href="@{'?pageNo='+${TotalPages}}">1</a>
+                                                        </li>
+                                                        <li th:if="${curentPage < TotalPages}" class="page-item"><a
+                                                                class="page-link"
+                                                                th:href="@{'?pageNo='+${curentPage + 1}}">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- sessions-section end -->
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/pcoded.min.js"></script>
+
+
+</body>
+
+</html>

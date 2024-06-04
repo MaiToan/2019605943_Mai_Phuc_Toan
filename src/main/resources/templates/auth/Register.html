@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" th:href="@{/css/LoginStyle.css}">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="box position-relative">
+    <div th:if="${noti_message != null}" style="width: 100% ; right: 15px"
+         class="d-flex justify-content-end position-absolute">
+        <div class="toast mb-5">
+            <div class="toast-header">
+                Notification
+            </div>
+            <div th:text="${noti_message}" class="toast-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="logo">
+            <img src="../../../upload/static/images/gallery/Logo.png" alt="">
+        </div>
+        <div class="text-center mt-4 name">
+            TOANSACH
+        </div>
+        <form th:action="@{/register}" th:object="${user}" method="POST" class="p-3 mt-3">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="email" name="Email" placeholder="Email" th:Field="*{Email}">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="Name" placeholder="Name" th:Field="*{Name}">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="number" name="Phone" id="phone" placeholder="Phone" th:Field="*{Phone}">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Password" th:Field="*{Password}">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="Repassword" placeholder="Repeat Password">
+            </div>
+            <button class="btn mt-3">Register</button>
+        </form>
+        <div class="text-center fs-6">
+            <a href="#">Forget password?</a> or <a href="/login">Sign up</a>
+        </div>
+    </div>
+</div>
+<script th:src="@{js/toast.js}" ></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+.admin_OrderDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*.page-wrapper{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex-direction: column;*/
+/*}*/
+
+.box-Detail {
+    background-color: #fff;
+}
+
+.row {
+    justify-content: center;
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+
+}
+
+.Info_cus {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+}
+
+.Info_cus .text_info_cus {
+    padding-left: 10px;
+    padding-top: 0;
+}
+.Info_cus .text_info_cus div{
+line-height: 30px;
+}
+
+.Info_cus .text_info_cus span {
+    color: #000b0f;
+}
+
+.box_info_body {
+    padding: 0;
+}
+
+.col-6 {
+    padding: 40px;
+}
+
+.Info_cus img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;"
+}

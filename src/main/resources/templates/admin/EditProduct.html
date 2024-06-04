@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Detail Product</title>
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome/css/fontawesome-all.min.css}">
+    <!-- animation css -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/animation/css/animate.min.css}">
+    <!-- vendor css -->
+    <link rel="stylesheet" th:href="@{/css/HomeAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/OrderDetail.css}">
+    <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+
+<body class="">
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+                <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="../../admin/Home" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Orders</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListOrders" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">List Orders</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Users</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListUser" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">List Users</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Products</label>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-shopping-bag"></i></span><span class="pcoded-mtext">Related to products</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="nav-item">
+                            <a href="../../admin/ListProducts" class="nav-link active"><span class="pcoded-micon"><i
+                                    class="fas fa-book"></i></span><span class="pcoded-mtext">List Books</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListAuthor" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-user-graduate"></i></span><span
+                                    class="pcoded-mtext">List Authors</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListCategory" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-list"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Pages</label>
+                </li>
+                <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i
+                        class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="#" class="nav-link"><span class="pcoded-micon"><i
+                        class="fas fa-store-alt"></i>
+                </span><span class="pcoded-mtext">Store</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="index.html" class="b-brand">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+            <img src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+        </a>
+    </div>
+    <a class="mobile-menu" id="mobile-header" href="#">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse">
+        <a href="#" class="mob-toggler"></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <div class="main-search open">
+
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-settings"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head">
+                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span>John Doe</span>
+                        </div>
+                        <ul class="pro-body">
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                                out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container position-relative">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5>Home</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                    class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#">Edit product</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 box-edit">
+                            <h3 style="font-size: 30px">Edit product</h3>
+                            <div style="max-width: 100%; margin: 15px 0; display: flex; justify-content: start; align-items: center; flex-wrap: wrap">
+                                <div class="card-author" th:each="obj:${authorCard}" th:object="${obj}"
+                                     style="display: flex; justify-content: start; align-items: center; margin: 5px">
+                                    <span style="font-size: 14px" th:text="*{getName()}"></span>
+                                    <form th:action="@{/admin/remove-author}" method="post">
+                                        <input type="hidden" name="id_author" th:value="*{getId()}">
+                                        <input type="hidden" name="id_product" th:value="${product.getId()}">
+                                        <input style="padding: 2px 5px" class="btn btn-sm border text-light m-0 ml-2" type="submit" value="X">
+                                    </form>
+                                </div>
+                            </div>
+                            <form th:action="@{/admin/choose-author}" method="post" class="box-choose">
+                                <div style="margin-bottom: 0" class="form-group">
+                                    <!--                                <label for="des-product">Stock</label>-->
+                                    <label style="width: 100%"> Authors
+                                        <select name="choose-author" class="mb-3 form-control">
+                                            <option th:each="obj:${authorList}" th:object="${obj}"
+                                                    th:text="*{getName()}" th:value="*{getId()}"></option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <input type="hidden" name="id_product" th:value="${product.getId()}">
+                                <input class="btn btn-success btn-sm" type="submit" value="Choose">
+                            </form>
+                            <form action="#" th:action="@{/admin/update-product}" enctype="multipart/form-data"
+                                  th:object="${product}" method="post">
+                                <div style=" margin: 10px 0">
+                                    <p style="margin-bottom: 10px; font-size: 17px">Image</p>
+                                    <div style="display: flex; justify-content: start; align-items: center ;">
+                                        <div style="width: 80px ; height: 100px; margin-right: 30px; ">
+                                            <img id="uploadPreview" th:src="@{'../../../upload/static/images/gallery/' + *{getImage()} }" alt="">
+
+                                        </div>
+                                        <div class="border bg0 m-b-50">
+                                            <input id="uploadImage" name="image_product"
+                                                   class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                                   type="file" onchange="PreviewImage();"
+                                                   accept="image/png, image/jpeg, image/jpg">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="id-product">ID Product</label>
+                                    <input th:value="*{id}" disabled type="text" class="form-control" id="id-product">
+                                    <input th:field="*{id}" type="hidden" class="form-control" name="id_product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name-product">Product Name</label>
+                                    <input th:field="*{Name}" type="text" class="form-control" id="name-product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="price-product">Price</label>
+                                    <input step="0.1" th:field="*{price}" type="number" class="form-control"
+                                           id="price-product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sale-product">Sale</label>
+                                    <input step="0.1" th:field="*{sale}" type="number" class="form-control"
+                                           id="sale-product">
+                                </div>
+                                <div class="form-group">
+                                    <label for="des-product">Product Description</label>
+                                    <textarea th:field="*{description}" maxlength="500" cols="30" rows="5" class="form-control"
+                                              id="des-product"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock-product">Stock</label>
+                                    <input th:field="*{productNumber}" type="number" class="form-control"
+                                           id="stock-product">
+                                </div>
+                                <div class="form-group">
+                                    <label style="width: 100%"> Category
+                                        <select th:field="*{categories.id}" class="mb-3 form-control">
+                                            <option th:each="obj:${categoriesList}"
+                                                    th:text="${obj.name}" th:value="${obj.id}"></option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <input class="btn btn-success" type="submit" value="Update">
+                            </form>
+                        </div>
+                        <!-- sessions-section end -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/pcoded.min.js"></script>
+<script th:src="@{/js/onchangeInputFile.js}"></script>
+
+</body>
+
+</html>

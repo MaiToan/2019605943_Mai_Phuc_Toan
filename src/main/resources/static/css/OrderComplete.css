@@ -1,0 +1,42 @@
+.colorlib-product {
+    padding: 7em 0;
+    clear: both;
+}
+
+.icon-check:before {
+    content: "\e92a";
+}
+
+.icon-addcart i {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 100px;
+    color: #17a2b8;
+}
+
+.icon-addcart {
+    color: #88c8bc;
+    display: block;
+    margin-bottom: 40px;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.btn-primary.btn-outline-primary {
+    background: transparent;
+    color: #000 !important;
+    border: 1px solid #616161 !important;
+}
+.btn-primary.btn-outline-primary:hover{
+    background-color: #ededed !important;
+}
+
+.btn {
+    margin-right: 4px;
+    margin-bottom: 4px;
+    font-size: 14px !important;
+    font-weight: 400;
+    padding: 8px 20px;
+}

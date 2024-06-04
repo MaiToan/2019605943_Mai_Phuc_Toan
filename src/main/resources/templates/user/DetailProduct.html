@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Detail Product</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon"/>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet"/>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"/>
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/DetailProduct.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="box position-relative">
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="/Home" class="navbar-brand font-weight-bold text-secondary" style="font-size: 42px">
+                <img style="max-width: 80px; margin-bottom: 8px" src="../../../upload/static/images/gallery/logo.png">
+                <span class="text-primary">TOANSACH</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <a href="/Home" class="nav-item nav-link">Home</a>
+                    <a href="/products" class="nav-item nav-link active">Product</a>
+                    <a href="/authors" class="nav-item nav-link">Authors</a>
+                    <a href="/about" class="nav-item nav-link">About</a>
+                    <div class="nav-item dropdown">
+                        <a href="/categories" class="nav-link dropdown-toggle" data-toggle="dropdown">Product
+                            Catalog</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/categories" class="dropdown-item font-weight-bold">List Product Catalog</a>
+                            <div th:each="obj:${categories}" th:object="${obj}">
+                                <a class="dropdown-item" th:text="*{getName()}"
+                                   th:href="@{'/category/' + *{getId()}}"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="nav-item nav-link pr-5">Contact</a>
+                    <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/products"><i
+                            class="fa fa-search" style="font-size:25px"></i></a>
+                    <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/cart"><i
+                            class="fa fa-cart-plus"
+                            style="font-size:25px; padding-right: 18px"><span th:if="${size_cart>0}"
+                                                                              style="color: #17a2b8"
+                                                                              th:text="'(' + ${size_cart} + ')'"></span></i></a>
+                    <a th:if="${user.getAvatar() == null}" class="nav-item nav-link" style="color: rgb(84, 84, 84);"
+                       href="/account"><i class="fa fa-user" style="font-size:25px"></i></a>
+                    <a class="box-avatar-user" href="/account" th:if="${user.getAvatar() != null}">
+                        <img class="img-avatar-user" th:src="@{'../../../upload/static/images/gallery/' + ${user.getAvatar()}}">
+                        <h6 class="m-0 pl-2" th:text="${user.getName()}"></h6>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div th:if="${noti_message != null}" style="width: 100% ; right: 15px; z-index: 1000"
+         class="d-flex justify-content-end position-absolute">
+        <div class="border-info toast mb-5">
+            <div style="font-weight: bold" class="toast-header">
+                Notification
+            </div>
+            <div th:text="${noti_message}" class="toast-body">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="product_image_area">
+        <div class="container">
+            <div class=" row s_product_inner">
+                <div style="max-width: 100%" class="col-lg-6">
+                    <div class="owl-carousel owl-theme s_Product_carousel">
+                        <div class="single-prd-item">
+                            <img class="img-fluid" th:src="@{'../../../upload/static/images/gallery/' + *{product.Image} }" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="set_border col-lg-5 offset-lg-1">
+                <div th:object="${product}" class="s_product_text">
+                    <h3 th:text="*{Name}"></h3>
+                    <ul class="list mb-3">
+                        <li>
+                            <span th:if="${avgRate != 0}" th:text="${avgRate}"></span>
+                            <span th:if="${avgRate == 0}">5</span><i class="fa fa-star mx-1 mr-3"></i>(<span
+                                th:text="${comments.size()}"></span>
+                            Rates)
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center">
+                        <h2 class="m-0 mr-3" th:text="'$' + *{Price - Sale}"></h2>
+                        <span th:if="*{Sale != null || Sale > 0}" style="text-decoration: line-through"
+                              th:text="'$' + *{Price}"></span>
+                    </div>
+
+                    <p th:text="*{Description}"></p>
+                    <ul class="list">
+                        <div style="display: flex; justify-content: start; align-items: center">
+                            <li style="margin-bottom: 0; margin-right: 25px" class="mt-3"><span
+                                    class="font-weight-bold">Category : </span><a class="active ml-3"
+                                                                                  th:href="@{'/category/' + *{getCategories().id}}"
+                                                                                  th:text="*{getNameCategory()}"></a>
+                            </li>
+                            <li class="mt-3">
+                                <span class="font-weight-bold">Authors : </span>
+
+                                <span th:each="obj:${authors}" th:object="${obj}">
+                                <a style="margin: 5px" class="active ml-3" th:href="@{'/author/' + *{getAuthorProduct().getId()}}"
+                                   th:text="*{getAuthorProduct().getName()}"></a>
+                            </span>
+                            </li>
+                        </div>
+                        <li class="mt-3"><span class="font-weight-bold">Availibility : </span><a class="ml-3"
+                                                                                                 th:text="*{ProductNumber}"></a>
+                        </li>
+                        <li class="mt-3"><span class="font-weight-bold">Product sold : </span><a class="ml-3"
+                                                                                                 th:text="*{ProductSold}"></a>
+                        </li>
+                    </ul>
+                    <form th:action="@{/cart}" method="POST">
+                        <input type="hidden" name="AddCart" th:value="*{getId()}">
+                        <input type="hidden" name="URL" th:value="${url}">
+
+                        <div class="product_count">
+                            <label>Quantity:</label>
+                            <button data-toggle="tooltip" data-placement="top" title="minus"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                                    class="increase items-count" type="button">-</i></button>
+                            <input type="text" name="Number" id="sst" size="2" maxlength="12" value="1"
+                                   title="Quantity:"
+                                   class="input-text qty">
+                            <button data-toggle="tooltip" data-placement="top" title="Plus"
+                                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                                    class="reduced items-count" type="button">+
+                            </button>
+                            <input style="width: 130px" class=" ml-3 button primary-btn" type="submit"
+                                   value="Add To Cart">
+                            <!--                        <a style="text-decoration: none" class=" ml-3 button primary-btn" href="#">Add to Cart</a>-->
+                        </div>
+                    </form>
+                    <div class="card_area d-flex align-items-center">
+                        <form th:action="@{/btn-favorite}" method="post">
+                            <input type="hidden" th:field="*{id}">
+                            <button th:if="${favorite == null}" data-toggle="tooltip" data-placement="top"
+                                    title="Favorite"
+                                    class="icon_btn" href="#"><i
+                                    class="fa fa-heart-o"></i></button>
+                            <button th:if="${favorite !=null}" data-toggle="tooltip" data-placement="top"
+                                    title="Favorite"
+                                    class="text-danger icon_btn" href="#">
+                                <i class="fas fa-heart"></i></button>
+                        </form>
+                        <a data-toggle="tooltip" data-placement="top" title="Share" class="icon_btn" href="#"><i
+                                class="fa fa-share-square-o"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="product_description_area">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active show" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                       aria-controls="review" aria-selected="true">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                       aria-selected="false">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                       aria-controls="contact" aria-selected="false">Top Product</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <p th:text="${product.Description}"></p>
+                </div>
+
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <section class="related-product-area section-margin--small mt-0">
+                        <div class="container">
+                            <div class="section-intro pb-60px">
+                                <p>Popular Item in the market</p>
+                                <h2>Top <span class="section-intro__style">Product</span></h2>
+                            </div>
+                            <div class="row mt-30">
+                                <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+                                    <div class="single-search-product-wrapper">
+                                        <div th:each="obj:${sub1List}" th:object="${obj}"
+                                             class="single-search-product d-flex">
+                                            <a class="p-2 border" href="#"><img th:src="@{'../../../upload/static/images/gallery/' + *{Image} }"
+                                                                                alt=""></a>
+                                            <div class="desc">
+                                                <a href="#" class="title" th:text="*{Name}">Gray Coffee Cup</a>
+                                                <div class="price" th:text="*{Price}">$170.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+                                    <div class="single-search-product-wrapper">
+                                        <div th:each="obj:${sub2List}" th:object="${obj}"
+                                             class="single-search-product d-flex">
+                                            <a class="p-2 border" href="#"><img th:src="@{'../../../upload/static/images/gallery/' + *{Image} }"
+                                                                                alt=""></a>
+                                            <div class="desc">
+                                                <a href="#" class="title" th:text="*{Name}">Gray Coffee Cup</a>
+                                                <div class="price" th:text="*{Price}">$170.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+                                    <div class="single-search-product-wrapper">
+                                        <div th:each="obj:${sub3List}" th:object="${obj}"
+                                             class="single-search-product d-flex">
+                                            <a class="p-2 border" href="#"><img th:src="@{'../../../upload/static/images/gallery/' + *{Image} }"
+                                                                                alt=""></a>
+                                            <div class="desc">
+                                                <a href="#" class="title" th:text="*{Name}">Gray Coffee Cup</a>
+                                                <div class="price" th:text="*{Price}">$170.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+                                    <div class="single-search-product-wrapper">
+                                        <div th:each="obj:${sub4List}" th:object="${obj}"
+                                             class="single-search-product d-flex">
+                                            <a class="p-2 border" href="#"><img th:src="@{'../../../upload/static/images/gallery/' + *{Image} }"
+                                                                                alt=""></a>
+                                            <div class="desc">
+                                                <a href="#" class="title" th:text="*{Name}">Gray Coffee Cup</a>
+                                                <div class="price" th:text="*{Price}">$170.00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="tab-pane fade active show" id="review" role="tabpanel" aria-labelledby="review-tab">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row total_rate">
+                                <div class="col-6">
+                                    <div class="box_total">
+                                        <h5>Overall</h5>
+                                        <h4 th:text="${avgRate}"></h4>
+                                        <h6>(<span th:text="${comments.size()}"></span> Reviews)</h6>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="rating_list">
+                                        <h3>Based on <span th:text="${comments.size()}"></span> Reviews</h3>
+                                        <ul class="list">
+                                            <li><a href="#">5 Star <i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i> ( <span th:text="${Five}"/> )</a></li>
+                                            <li><a href="#">4 Star <i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i> ( <span th:text="${Four}"/> )</a></li>
+                                            <li><a href="#">3 Star <i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i> ( <span th:text="${Three}"/> )</a></li>
+                                            <li><a href="#">2 Star <i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i> ( <span th:text="${Two}"/> )</a></li>
+                                            <li><a href="#">1 Star <i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i><i class="fa fa-star"></i><i
+                                                    class="fa fa-star"></i> ( <span th:text="${One}"/> )</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review_list">
+                                <div th:each="obj:${lsComment}" th:object="${obj}" class="review_item">
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img th:if="*{user.Avatar != null || user.Avatar != '' }"
+                                                 th:src="@{'../../../upload/static/images/gallery/' + *{user.Avatar} }" alt="">
+                                            <img th:if="*{user.Avatar == null || user.Avatar == '' }"
+                                                 src="/images/gallery/author2.jpg" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 th:text="*{user.Name}">Blake Ruiz</h4>
+                                            <i class="fa fa-star"></i>
+                                            <i th:if="*{RateNumber >= 2}" class="fa fa-star"></i>
+                                            <i th:if="*{RateNumber < 2}" class="fa fa-star-o"></i>
+                                            <i th:if="*{RateNumber >= 3}" class="fa fa-star"></i>
+                                            <i th:if="*{RateNumber < 3}" class="fa fa-star-o"></i>
+                                            <i th:if="*{RateNumber >= 4}" class="fa fa-star"></i>
+                                            <i th:if="*{RateNumber < 4}" class="fa fa-star-o"></i>
+                                            <i th:if="*{RateNumber >= 5}" class="fa fa-star"></i>
+                                            <i th:if="*{RateNumber < 5}" class="fa fa-star-o"></i>
+                                        </div>
+                                    </div>
+                                    <p th:text="*{Content}"></p>
+                                </div>
+                            </div>
+
+                            <h4 class="text-center mt-5" th:if="${TotalPages < 1 }">No comment of this book</h4>
+                            <nav th:if="${TotalPages > 1 }" aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center mt-5">
+                                    <li th:if="${curentPage > 1}" class="page-item"><a class="page-link"
+                                                                                       th:href="@{'?pageNo='+${curentPage - 1}}">Previous</a>
+                                    </li>
+                                    <li th:if="${TotalPages < 3}" th:each="i:${#numbers.sequence(1, TotalPages)}"
+                                        th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+                                        <a class="page-link" th:text="${i}" th:href="@{'?pageNo='+${i}}">1</a>
+                                    </li>
+
+                                    <li th:if="${TotalPages >= 3 &&(curentPage < 3 || curentPage == TotalPages)}"
+                                        th:each="i:${#numbers.sequence(1, 3)}"
+                                        th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+                                        <a class="page-link" th:text="${i}" th:href="@{'?pageNo='+${i}}">1</a>
+                                    </li>
+
+                                    <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage < TotalPages - 1}"
+                                        th:each="i:${#numbers.sequence(curentPage - 1, curentPage + 1)}"
+                                        th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+                                        <a class="page-link" th:text="${i}" th:href="@{'?pageNo='+${i}}">1</a>
+                                    </li>
+
+                                    <li th:if="${TotalPages >= 3 && curentPage >=3 && curentPage == TotalPages - 1}"
+                                        th:each="i:${#numbers.sequence(curentPage - 1, curentPage)}"
+                                        th:classappend="${curentPage == i ? 'active':''}" class="page-item">
+                                        <a class="page-link" th:text="${i}" th:href="@{'?pageNo='+${i}}">1</a>
+                                    </li>
+                                    <li th:if="${TotalPages > 3}" class="page-item"><a class="page-link"
+                                                                                       href="#">...</a>
+                                    </li>
+
+                                    <li th:if="${TotalPages > 3}"
+                                        th:classappend="${curentPage == TotalPages ? 'active':''}"
+                                        class="page-item">
+                                        <a class="page-link" th:text="${TotalPages}"
+                                           th:href="@{'?pageNo='+${TotalPages}}">1</a>
+                                    </li>
+                                    <li th:if="${curentPage < TotalPages}" class="page-item"><a class="page-link"
+                                                                                                th:href="@{'?pageNo='+${curentPage + 1}}">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="review_box">
+                                <h4>Add a Review</h4>
+                                <form th:action="@{'/DetailProduct/' + ${id_product}}" th:object="${newcomment}"
+                                      method="POST" class="form-contact form-review mt-3">
+                                    <p>Your Rating:</p>
+                                    <select th:field="*{RateNumber}" style="font-size: 1rem; padding: 0"
+                                            class="col-2 ml-1 border" id="search" name="rate_number" size="1">
+                                        <option value=1>1 Sao</option>
+                                        <option value=2>2 Sao</option>
+                                        <option value=3>3 Sao</option>
+                                        <option value=4>4 Sao</option>
+                                        <option value=5 selected>5 Sao</option>
+                                    </select>
+                                    <ul class="mb-3 list">
+                                        <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                    </ul>
+                                    <div class="form-group">
+                                    <textarea maxlength="250" th:field="*{Content}"
+                                              class="limit-text form-control different-control w-100"
+                                              name="message" id="textarea" cols="30" rows="10"
+                                              placeholder="Enter Message"></textarea>
+                                    </div>
+                                    <div class="form-group text-center text-md-right mt-3">
+                                        <input type="submit" class="button button--active button-review"
+                                               value="Submit"></input>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
+                   style="font-size: 40px; line-height: 40px">
+                    <i class="flaticon-043-teddy-bear"></i>
+                    <span th:text="${store.getName()}" class="text-white">TOANSACH</span>
+                </a>
+                <p th:text="${store.getDescription()}">
+                </p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">Get In Touch</h3>
+                <div class="d-flex">
+                    <i style="color: #17a2b8" class="fas fa-map-marked"></i>
+                    <div class="pl-3">
+                        <h5 class="text-white">Address</h5>
+                        <p th:text="${store.getAddress()}">123 Street, New York, USA</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <h4 class="fa fa-envelope text-primary"></h4>
+                    <div class="pl-3">
+                        <h5 class="text-white">Email</h5>
+                        <p th:text="${store.getEmail()}">info@example.com</p>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <i style="color: #17a2b8" class="fas fa-phone"></i>
+                    <div class="pl-3">
+                        <h5 class="text-white">Phone</h5>
+                        <p th:text="${store.getPhone()}">+012 345 67890</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">Quick Links</h3>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="/Home"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="/authors"><i class="fa fa-angle-right mr-2"></i>Author</a>
+                    <a class="text-white mb-2" href="/categories"><i class="fa fa-angle-right mr-2"></i>Categories</a>
+                    <a class="text-white" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">Newsletter</h3>
+                <form action="">
+                    <div class="form-group">
+                        <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
+                               required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                               required="required"/>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-block border-0 py-3" type="submit">
+                            Submit Now
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{js/easing.js}"></script>
+    <script th:src="@{js/easing.min.js}"></script>
+    <script th:src="@{js/owl.carousel.min.js}"></script>
+    <script th:src="@{js/lightbox.min.js}"></script>
+    <script th:src="@{js/lightbox.js}"></script>
+    <!-- Contact Javascript File -->
+    <script th:src="@{js/jqBootstrapValidation.min.js}"></script>
+    <script th:src="@{js/contact.js}"></script>
+    <script th:src="@{js/main.js}"></script>
+    <script th:src="@{/js/toast.js}"></script>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Detail User</title>
+<!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+<!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    <![endif]-->
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome/css/fontawesome-all.min.css}">
+    <!-- animation css -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/animation/css/animate.min.css}">
+
+
+    <!-- vendor css -->
+    <link rel="stylesheet" th:href="@{/css/HomeAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/OrderDetail.css}">
+</head>
+
+<body class="">
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="index.html" class="b-brand">
+                <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+                <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="../../admin/Home" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Orders</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListOrders" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">List Orders</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Users</label>
+                </li>
+                <li class="nav-item active">
+                    <a href="../../admin/ListUser" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">List Users</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Products</label>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-shopping-bag"></i></span><span class="pcoded-mtext">Related to products</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="nav-item">
+                            <a href="../../admin/ListProducts" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-book"></i></span><span class="pcoded-mtext">List Books</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListAuthor" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-user-graduate"></i></span><span
+                                    class="pcoded-mtext">List Authors</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListCategory" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-list"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Pages</label>
+                </li>
+                <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i
+                        class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="#" class="nav-link"><span class="pcoded-micon"><i
+                        class="fas fa-store-alt"></i>
+                </span><span class="pcoded-mtext">Store</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- [ navigation menu ] end -->
+
+<!-- [ Header ] start -->
+<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="index.html" class="b-brand">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+            <img  style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+        </a>
+    </div>
+    <a class="mobile-menu" id="mobile-header" href="#">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse">
+        <a href="#" class="mob-toggler"></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <div class="main-search open">
+
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-settings"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div class="pro-head">
+                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span>John Doe</span>
+                        </div>
+                        <ul class="pro-body">
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
+                            </li>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                                out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5>Home</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                    class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#">Detail User</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sessions-section start -->
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-9 col-md-10 col-sm-12 box-Detail p-3">
+                                    <div class="col-12 box-header">
+                                        <div class="header-info">
+                                            <h5>User ID: <span th:text="${'#'+User.getId()}">#434556</span></h5>
+                                            <h6 style="color: #7c7c7c" th:text="${dateTime}">Mon, july 2020</h6>
+                                            <span th:if="${User.getActive() == 1}"
+                                                  style="background-color: #3b98ff; padding: 2px 5px; color: #fff; border-radius: 2px">Active</span>
+                                            <span th:if="${User.getActive() == 0}"
+                                                  style="background-color: #ff0101; padding: 2px 5px; color: #fff; border-radius: 2px">Lock</span>
+                                        </div>
+                                        <div class="header-status">
+                                            <form th:action="@{/admin/ChangeActive}" method="post" th:object="${User}">
+                                                <input type="hidden" name="ID" th:value="*{getId()}">
+                                                <select th:field="*{Active}" class="p-1">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Lock</option>
+                                                </select>
+                                                <input class="btn btn-sm btn-info" type="submit" value="Change">
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 box_info_body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="Info_cus">
+                                                    <img th:if="${User.getAvatar() != null}"
+                                                         th:src="@{'../../../upload/static/images/gallery/' + ${User.getAvatar()}}" alt="">
+                                                    <img th:if="${User.getAvatar() == null}"
+                                                         src="../../../upload/static/images/gallery/NormalAvatar.jpg" alt="">
+                                                    <div class="text_info_cus">
+
+                                                        <h5>Customer</h5>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Name:</span>
+                                                            <span th:text="${User.getName()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Email:</span>
+                                                            <span th:text="${User.getEmail()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 50px; display: inline-block; color: #787878">Phone:</span>
+                                                            <span th:text="${User.getPhone()}"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="Info_cus">
+                                                    <div class="text_info_cus">
+                                                        <div >
+                                                            <span style="width: 80px; display: inline-block; color: #787878">Age:</span>
+                                                            <span th:text="${User.getAge()}"></span>
+                                                        </div>
+                                                        <div >
+                                                            <span style="width: 80px; display: inline-block; color: #787878">Address:</span>
+                                                            <span th:text="${User.getAddress()}"></span>
+                                                        </div>
+<!--                                                        <div>Age: <span th:text="${User.getAge()}"></span></div>-->
+<!--                                                        <div>Address:-->
+<!--                                                            <span th:text="${User.getAddress()}"></span>-->
+<!--                                                        </div>-->
+                                                        <div th:if="${User.getGender() == 1}">
+                                                            <span style="width: 80px; display: inline-block; color: #787878">Gender:</span>
+                                                            <span>Male</span>
+                                                        </div>
+                                                        <div th:if="${User.getGender() == 2}">
+                                                            <span style="width: 80px; display: inline-block; color: #787878">Gender:</span>
+                                                            <span>Female</span>
+                                                        </div>
+                                                        <div th:if="${User.getGender() == 3}">
+                                                            <span style="width: 80px; display: inline-block; color: #787878">Gender:</span>
+                                                            <span>Other</span>
+                                                        </div>
+<!--                                                        <div th:if="${User.getGender() == 1}">Gender:-->
+<!--                                                            <span>Male</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div th:if="${User.getGender() == 2}">Gender:-->
+<!--                                                            <span>Female</span>-->
+<!--                                                        </div>-->
+<!--                                                        <div th:if="${User.getGender() == 3}">Gender:-->
+<!--                                                            <span>Other</span>-->
+<!--                                                        </div>-->
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12">
+                                                <div class="card-body px-0 py-0">
+                                                    <div class="table-responsive">
+                                                        <div class="session-scroll"
+                                                             style="height:478px;position:relative;">
+                                                            <table class="table table-hover m-b-0">
+                                                                <thead>
+                                                                <tr>
+                                                                <tr>
+                                                                    <th>ID Order</th>
+                                                                    <th>payment method</th>
+                                                                    <th>Order Date</th>
+                                                                    <th>Status</th>
+                                                                    <th>Order Total</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr th:each="obj:${orders}" th:object="${obj}">
+                                                                    <td th:text="*{1000000 + getId()}">00000001</td>
+                                                                    <td style="text-align: center"
+                                                                        th:if="*{getPaymentMethod() == 1}">
+                                                                        Banking
+                                                                    </td>
+                                                                    <td style="text-align: center"
+                                                                        th:if="*{getPaymentMethod() == 2}">
+                                                                        delivery
+                                                                    </td>
+                                                                    <td th:text="*{getOrderDate()}">Jun 15, 2017</td>
+                                                                    <td th:if="*{getStatus() == 0}"><span
+                                                                            class="status text-danger">&bull;</span>
+                                                                        Cancelled
+                                                                    </td>
+                                                                    <td th:if="*{getStatus() == 1}"><span
+                                                                            class="status text-warning">&bull;</span>
+                                                                        Pending
+                                                                    </td>
+                                                                    <td th:if="*{getStatus() == 2}"><span
+                                                                            class="status text-warning">&bull;</span>
+                                                                        Confirm
+                                                                    </td>
+                                                                    <td th:if="*{getStatus() == 3}"><span
+                                                                            class="status text-info">&bull;</span>
+                                                                        Shipped
+                                                                    </td>
+                                                                    <td th:if="*{getStatus() == 4}"><span
+                                                                            class="status text-success">&bull;</span>
+                                                                        Delivered
+                                                                    </td>
+                                                                    <td th:text="*{'$' + getDisCount()}">$254</td>
+                                                                    <td><a th:href="@{'../OrderDetail/'+ *{getId()}}"
+                                                                           class="view"
+                                                                           title="View Details" data-toggle="tooltip"><i
+                                                                            class="far fa-eye"></i></a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- sessions-section end -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/pcoded.min.js"></script>
+
+
+</body>
+
+</html>

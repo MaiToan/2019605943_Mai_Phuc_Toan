@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Order Detail</title>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon"/>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet"/>
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet"/>
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"/>
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet"/>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/Cart.css}" rel="stylesheet"/>
+    <link th:href="@{/css/Checkout.css}" rel="stylesheet"/>
+    <link th:href="@{/css/Account.css}" rel="stylesheet"/>
+    <style>
+        .size-111 {
+            width: 100%;
+            height: 43px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box position-relative">
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-light position-relative shadow">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+            <a href="/Home" class="navbar-brand font-weight-bold text-secondary" style="font-size: 42px">
+                <img style="max-width: 80px; margin-bottom: 8px" src="../../../upload/static/images/gallery/logo.png">
+                <span class="text-primary">TOANSACH</span>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav font-weight-bold mx-auto py-0">
+                    <a href="/Home" class="nav-item nav-link">Home</a>
+                    <a href="/products" class="nav-item nav-link">Product</a>
+                    <a href="/authors" class="nav-item nav-link">Authors</a>
+                    <a href="/about" class="nav-item nav-link">About</a>
+                    <div class="nav-item dropdown">
+                        <a href="/categories" class="nav-link dropdown-toggle" data-toggle="dropdown">Product
+                            Catalog</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="/categories" class="dropdown-item font-weight-bold">List Product Catalog</a>
+                            <div th:each="obj:${categories}" th:object="${obj}">
+                                <a class="dropdown-item" th:text="*{getName()}" th:href="@{'/category/' + *{getId()}}"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="nav-item nav-link pr-5">Contact</a>
+                    <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/products"><i
+                            class="fa fa-search" style="font-size:25px"></i></a>
+                    <a class="pr-3 nav-item nav-link" style="color: rgb(84, 84, 84);" href="/cart"><i
+                            class="fa fa-cart-plus"
+                            style="font-size:25px; padding-right: 18px"><span th:if="${size_cart>0}"
+                                                                              style="color: #17a2b8"
+                                                                              th:text="'(' + ${size_cart} + ')'"></span></i></a>
+                    <a th:if="${user.getAvatar() == null}" class="nav-item nav-link" style="color: rgb(84, 84, 84);"
+                       href="/account"><i class="fa fa-user" style="font-size:25px"></i></a>
+                    <a class="box-avatar-user" href="/account" th:if="${user.getAvatar() != null}">
+                        <img class="img-avatar-user" th:src="@{'../../../upload/static/images/gallery/' + ${user.getAvatar()}}">
+                        <h6 class="m-0 pl-2" th:text="${user.getName()}"></h6>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!---->
+    <div th:if="${noti_message != null}" style="width: 100% ; right: 15px; z-index: 1000"
+         class="d-flex justify-content-end position-absolute">
+        <div class="border-info toast mb-5">
+            <div style="font-weight: bold" class="toast-header">
+                Notification
+            </div>
+            <div th:text="${noti_message}" class="toast-body">
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bg0 p-t-75 p-b-85">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-10 col-xl-9">
+                    <div style="background-color: #f5f5f5; padding: 40px 60px; border: 3px solid #ccc"
+                         class="flex-w flex-t p-t-15 p-b-30">
+                        <div class="size-209 p-r-0-sm w-full-ssm">
+                            <div>
+                                <h3 style="font-size: 20px; margin-bottom: 25px"
+                                    class="title_info stext-112 cl8 text-center">
+                                    INFORMATION USER ORDER
+                                </h3>
+                                <div th:object="${order}"
+                                     style="display: grid; grid-template-columns: auto auto; column-gap: 100px"
+                                     class="box-container">
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Name: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                   name="name" disabled th:value="*{getName()}">
+                                        </div>
+                                    </div>
+
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Phone: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                   disabled th:value="*{getPhone()}">
+                                        </div>
+                                    </div>
+
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Country: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" disabled
+                                                   type="text" th:value="*{getCountry()}">
+                                        </div>
+                                    </div>
+
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">City: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                                   th:value="*{getCity()}" disabled
+                                                   type="text">
+
+                                        </div>
+                                    </div>
+
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">District: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                                   disabled th:value="*{getDistrict()}"
+                                                   type="text">
+
+                                        </div>
+                                    </div>
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Address: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                   th:value="*{getAddress()}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Note: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9  ">
+                                            <textarea style="height: 100px" rows="15"
+                                                      class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                      th:text="*{getNote()}" disabled></textarea>
+                                        </div>
+                                    </div>
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Order date: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text"
+                                                   th:value="*{getOrderDateFormat()}" disabled>
+                                        </div>
+                                    </div>
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-3 m-0">Status: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-9">
+                                            <td th:if="*{getStatus() == 0}"><span
+                                                    class="status text-danger">&bull;</span> Cancelled
+                                            </td>
+                                            <td th:if="*{getStatus() == 1}"><span
+                                                    class="status text-warning">&bull;</span> Pending
+                                            </td>
+                                            <td th:if="*{getStatus() == 2}"><span
+                                                    class="status text-warning">&bull;</span> Confirm
+                                            </td>
+                                            <td th:if="*{getStatus() == 3}"><span class="status text-info">&bull;</span>
+                                                Shipped
+                                            </td>
+                                            <td th:if="*{getStatus() == 4}"><span
+                                                    class="status text-success">&bull;</span> Delivered
+                                            </td>
+                                        </div>
+                                    </div>
+                                    <div style="align-items: center" class="row box mb-1">
+                                        <label class="col-4 m-0">Payment method: </label>
+                                        <div style="padding: 0 ; margin-top: 0" class="col-8">
+                                            <span class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                                  th:if="*{paymentMethod == 1}">Direct Bank Tranfer</span>
+                                            <span class="stext-111 cl8 plh3 size-111 p-lr-15"
+                                                  th:if="*{paymentMethod == 2}">Payment on delivery</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 m-lr-auto m-b-50">
+                    <h3 style="font-size: 20px; margin-bottom: 25px"
+                        class="title_info stext-112 cl8 text-center">
+                        INFORMATION BOOKS ORDER
+                    </h3>
+                    <div class=" m-lr-0-xl">
+                        <div class="wrap-table-shopping-cart">
+                            <table style="border: 1px solid #ccc" class="table-shopping-cart">
+                                <tr style="background-color: #17a2b8" class="table_head">
+                                    <th class="column-1">Product</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Price</th>
+                                    <th class="column-4">Quantity</th>
+                                    <th class="column-5">Total</th>
+                                </tr>
+                                <tr th:each="obj:${orderDetails}" th:object="${obj}" style="height: 100px"
+                                    class="table_row">
+                                    <td class="column-1" style="height: 100px; padding-bottom: 0">
+                                        <img style="max-width: 50px ;box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;"
+                                             th:src="@{'../../../upload/static/images/gallery/' + *{getProductOrder().getImage()}}" alt="IMG">
+                                    </td>
+                                    <td style="padding-right: 30px;height: 100px; padding-bottom: 0; font-weight: bold"
+                                        class="column-2" th:text="*{getProductOrder().getName()}">
+                                        Fresh Strawberries
+                                    </td>
+                                    <td class="column-3 text-info font-weight-bold" th:text="*{'$' + getUnitPrice()}"
+                                        style="height: 100px; padding-bottom: 0">$36.00
+                                    </td>
+                                    <td style="height: 100px; padding-bottom: 0"
+                                        class="dis-flex flex-row align-items-center column-4">
+                                        <div style="width: auto" class="wrap-num-product flex-w m-l-auto m-r-0">
+                                            <input th:value="*{getQuantity()}"
+                                                   class="mtext-104 cl3 txt-center num-product" disabled=""
+                                                   type="number" name="num-product1" value="2">
+                                        </div>
+                                    </td>
+                                    <td th:text="*{'$' + getUnitPrice()*getQuantity()}"
+                                        class="column-5 text-info font-weight-bold"
+                                        style=" height: 100px; padding-bottom: 0">$435
+                                    </td>
+                                </tr>
+                                <tr style="height: 100px" class="table_row">
+                                    <td class="column-1" style="height: 100px; padding-bottom: 0">
+                                    </td>
+                                    <td style="padding-right: 30px;height: 100px; padding-bottom: 0"
+                                        class="column-2">
+                                    </td>
+                                    <td class="column-3 text-info font-weight-bold"
+                                        style="height: 100px; padding-bottom: 0">
+                                    </td>
+                                    <td style="height: 100px; padding-bottom: 0; font-weight: bold"
+                                        class="dis-flex flex-row align-items-center column-4">
+                                        Total Order:
+                                    </td>
+                                    <td th:text="${'$' + order.getDisCount()}"
+                                        class="column-5 text-info font-weight-bold"
+                                        style=" height: 100px; padding-bottom: 0">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+            <div class="row pt-5">
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <a href="" class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
+                       style="font-size: 40px; line-height: 40px">
+                        <i class="flaticon-043-teddy-bear"></i>
+                        <span th:text="${store.getName()}" class="text-white">TOANSACH</span>
+                    </a>
+                    <p th:text="${store.getDescription()}">
+                    </p>
+                    <div class="d-flex justify-content-start mt-4">
+                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                           style="width: 38px; height: 38px"
+                           href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                           style="width: 38px; height: 38px"
+                           href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                           style="width: 38px; height: 38px"
+                           href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                           style="width: 38px; height: 38px"
+                           href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="text-primary mb-4">Get In Touch</h3>
+                    <div class="d-flex">
+                        <i style="color: #17a2b8" class="fas fa-map-marked"></i>
+                        <div class="pl-3">
+                            <h5 class="text-white">Address</h5>
+                            <p th:text="${store.getAddress()}">123 Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <h4 class="fa fa-envelope text-primary"></h4>
+                        <div class="pl-3">
+                            <h5 class="text-white">Email</h5>
+                            <p th:text="${store.getEmail()}">info@example.com</p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <i style="color: #17a2b8" class="fas fa-phone"></i>
+                        <div class="pl-3">
+                            <h5 class="text-white">Phone</h5>
+                            <p th:text="${store.getPhone()}">+012 345 67890</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="text-primary mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-white mb-2" href="/Home"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                        <a class="text-white mb-2" href="/about"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                        <a class="text-white mb-2" href="/authors"><i class="fa fa-angle-right mr-2"></i>Author</a>
+                        <a class="text-white mb-2" href="/categories"><i
+                                class="fa fa-angle-right mr-2"></i>Categories</a>
+                        <a class="text-white" href="/contact"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-5">
+                    <h3 class="text-primary mb-4">Newsletter</h3>
+                    <form action="">
+                        <div class="form-group">
+                            <input type="text" class="form-control border-0 py-4" placeholder="Your Name"
+                                   required="required"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control border-0 py-4" placeholder="Your Email"
+                                   required="required"/>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary btn-block border-0 py-3" type="submit">
+                                Submit Now
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary p-3 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script th:src="@{/js/easing.js}"></script>
+        <script th:src="@{/js/easing.min.js}"></script>
+        <script th:src="@{/js/owl.carousel.min.js}"></script>
+        <script th:src="@{/js/lightbox.min.js}"></script>
+        <script th:src="@{/js/lightbox.js}"></script>
+        <!-- Contact Javascript File -->
+        <script th:src="@{/js/jqBootstrapValidation.min.js}"></script>
+        <script th:src="@{/js/contact.js}"></script>
+
+        <!-- Template Javascript -->
+        <script th:src="@{/js/main.js}"></script>
+        <script th:src="@{/js/cart.js}"></script>
+        <script th:src="@{/js/toast.js}"></script>
+    </div>
+</body>
+
+</html>
