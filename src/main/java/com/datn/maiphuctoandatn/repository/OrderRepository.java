@@ -27,7 +27,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query(value = "SELECT * FROM orders where user_id =:userId and id=:id", nativeQuery = true)
     Order findOrderByUserAndId(Long userId, Long id);
 
-    @Query(value = "SELECT * FROM orders where status != 0 order by status", nativeQuery = true)
+    @Query(value = "SELECT * FROM orders where status != 0 order by order_date desc", nativeQuery = true)
     List<Order> getAllOrder();
 
     @Query(value = "SELECT * FROM orders WHERE MONTH(created_at) = MONTH(CURRENT_TIMESTAMP) AND YEAR(created_at) = YEAR(CURRENT_TIMESTAMP) AND status != 0", nativeQuery = true)

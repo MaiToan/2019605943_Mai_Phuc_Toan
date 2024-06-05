@@ -13,4 +13,10 @@ public interface IAuthorService {
     Author getAuthorById(Long id);
 
     public List<Author> findAuthorBySearch(String search);
+
+    public void saveAuthor(Author author);
+
+    public void deleteAuthor(Author author);
+
+    public void updateAuthor(Author author);
 }

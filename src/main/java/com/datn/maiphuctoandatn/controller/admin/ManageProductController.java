@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,10 @@ public class ManageProductController {
             ListProducts = productService.GetAllProduct();
         } else {
             ListProducts = productService.findProductBySearch(searchProduct);
+        }
+        for (Product product : ListProducts) {
+            String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(product.getCreated_at());
+            product.setCreateFormatDate(formatDate);
         }
         model.addAttribute("searchProduct", searchProduct);
         model.addAttribute("products", ListProducts);

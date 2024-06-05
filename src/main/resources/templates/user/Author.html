@@ -90,7 +90,7 @@
                         <div th:each="obj:${authors}" th:object="${obj}"
                              class="col-md-3 col-lg-2 col-sm-6 text-center team mb-5">
                             <div class="position-relative overflow-hidden mb-4" style="border-radius: 100%">
-                                <img class="img-fluid w-100" th:src="@{'../../../upload/static/images/gallery/' + *{Avatar} }" alt=""/>
+                                <img style="min-width: 170px; min-height: 170px;" class="img-fluid w-100" th:src="@{'../../../upload/static/images/gallery/' + *{Avatar} }" alt=""/>
                                 <div class="team-social d-flex align-items-center justify-content-center w-100 h-100 position-absolute">
 
                                     <a data-toggle="tooltip" data-placement="top" title="View"

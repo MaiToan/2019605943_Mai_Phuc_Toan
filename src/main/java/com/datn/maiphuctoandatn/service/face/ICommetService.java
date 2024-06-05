@@ -15,4 +15,7 @@ public interface ICommetService {
     public List<Comment> GetCommentList(Long product_id);
 
     public Comment getCommentByID(Long id);
+
+    public List<Comment> getCommentTop();
+
 }

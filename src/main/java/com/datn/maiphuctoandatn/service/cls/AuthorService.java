@@ -26,4 +26,25 @@ public class AuthorService implements IAuthorService {
     public List<Author> findAuthorBySearch(String search) {
         return authorRepository.getAuthorBySearch(search);
     }
+
+    @Override
+    public void saveAuthor(Author author) {
+        authorRepository.save(author);
+    }
+
+    @Override
+    public void updateAuthor(Author author) {
+        Author getAuthorDB = authorRepository.getAuthorById(author.getId());
+        getAuthorDB.setName(author.getName());
+        getAuthorDB.setAddress(author.getAddress());
+        getAuthorDB.setDescription(author.getDescription());
+        if (author.getAvatar() != null && !author.getAvatar().isEmpty())
+            getAuthorDB.setAvatar(author.getAvatar());
+        authorRepository.save(getAuthorDB);
+    }
+
+    @Override
+    public void deleteAuthor(Author author) {
+        authorRepository.save(author);
+    }
 }

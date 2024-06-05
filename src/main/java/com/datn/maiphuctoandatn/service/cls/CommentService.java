@@ -48,4 +48,9 @@ public class CommentService implements ICommetService {
     public Comment getCommentByID(Long id) {
         return commentRepository.findById(id).get();
     }
+
+    @Override
+    public List<Comment> getCommentTop() {
+        return commentRepository.getTopComment();
+    }
 }

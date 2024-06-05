@@ -1,10 +1,7 @@
 package com.datn.maiphuctoandatn.controller.user;
 
 import com.datn.maiphuctoandatn.model.*;
-import com.datn.maiphuctoandatn.service.face.IAuthorService;
-import com.datn.maiphuctoandatn.service.face.ICategoryService;
-import com.datn.maiphuctoandatn.service.face.IProductService;
-import com.datn.maiphuctoandatn.service.face.IStoreService;
+import com.datn.maiphuctoandatn.service.face.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +25,9 @@ public class HomeController {
     @Autowired
     IProductService productService;
 
+    @Autowired
+    ICommetService commetService;
+
     @GetMapping("/Home")
     public String Home( Model model, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("session_user");
@@ -37,6 +37,10 @@ public class HomeController {
         List<Author> authors = authorService.getAllAuthors();
         if (authors.size() > 5){
             authors = authors.subList(0, 5);
+        }
+        List<Comment> commentsTop = commetService.getCommentTop();
+        if (commentsTop.size() > 4){
+            commentsTop = commentsTop.subList(0, 4);
         }
         List<Categories> categories = categoryService.getThreeCategories();
         Store store = storeService.findStore();
@@ -55,6 +59,7 @@ public class HomeController {
         model.addAttribute("lsProduct", lsProduct);
         model.addAttribute("url", "/Home");
         model.addAttribute("noti_message", message);
+        model.addAttribute("commentsTop", commentsTop);
         return "user/Home";
     }
 }

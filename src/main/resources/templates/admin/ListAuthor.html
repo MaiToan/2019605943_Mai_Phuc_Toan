@@ -171,8 +171,9 @@
                         </div>
                         <div class="col-xl-12">
                             <div class="card table-card">
-                                <div class="card-header">
-                                    <h5>List Author</h5>
+                                <div style="display: flex; justify-content: space-between; align-items: center" class="card-header">
+                                    <h5>List Authors</h5>
+                                    <a style="line-height: 25px" href="/admin/NewAuthor" class="btn btn-primary btn-sm" > <i class="fas fa-plus-circle"></i>Add Author</a>
                                 </div>
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
@@ -191,10 +192,10 @@
                                                 <tr class="table_body_user" th:each="obj:${authors}" th:object="${obj}">
                                                     <td class="cl-user font-weight-bold" th:text="*{getId()}"></td>
                                                     <td th:if="*{getAvatar()!=null and getAvatar() != ''}"><img
-                                                            th:src="@{'/picture/' + *{Avatar} }"
+                                                            th:src="@{'../../../upload/static/images/gallery/' + *{Avatar} }"
                                                             alt=""></td>
                                                     <td th:if="*{getAvatar()==null or getAvatar() == ''}"><img
-                                                            th:src="@{'/picture/NormalAvatar.jpg'}" alt=""></td>
+                                                            th:src="@{'../../../upload/static/images/gallery/NormalAvatar.jpg'}" alt=""></td>
                                                     <td class="cl-user" th:text="*{getName()}"></td>
                                                     <td class="cl-user"
                                                         th:if="*{getAddress()!=null and getAddress() != ''}"
@@ -202,7 +203,7 @@
                                                     <td class="cl-user"
                                                         th:if="*{getAddress()==null or getAddress() == ''}">Blank
                                                     </td>
-                                                    <td class="cl-user"><a href="">View</a></td>
+                                                    <td class="cl-user"><a th:href="@{'/admin/detail-author/' + *{id}}">View</a></td>
                                                 </tr>
 
                                                 </tbody>

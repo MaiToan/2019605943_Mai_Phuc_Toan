@@ -204,64 +204,17 @@
                 <h1 class="mb-4">What User Say!</h1>
             </div>
             <div class="owl-carousel testimonial-carousel row">
-                <div class="testimonial-item px-3 col-lg-3">
+                <div th:each="obj:${commentsTop}" th:object="${obj}" class="testimonial-item px-3 col-lg-3">
                     <div class="d-flex align-items-center">
-                        <img class="rounded-circle" th:src="@{../../../upload/static/images/gallery/testimonial-1.jpg}"
-                             style="width: 70px; height: 70px" alt="Image"/>
+                        <img class="rounded-circle" th:src="@{'../../../upload/static/images/gallery/' + *{getUser().getAvatar()}}"
+                             style="width: 70px; height: 70px; box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;" alt="Image"/>
                         <div class="pl-3">
-                            <h5>Parent Name</h5>
-                            <i>Profession</i>
+                            <h5 th:text="*{getUser().getName()}"></h5>
                         </div>
                     </div>
                     <div class="bg-light shadow-sm rounded mb-4 p-4">
                         <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                        Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                        eirmod clita lorem. Dolor tempor ipsum clita
-                    </div>
-                </div>
-                <div class="testimonial-item px-3 col-lg-3">
-                    <div class="d-flex align-items-center">
-                        <img class="rounded-circle" th:src="@{../../../upload/static/images/gallery/testimonial-2.jpg}"
-                             style="width: 70px; height: 70px" alt="Image"/>
-                        <div class="pl-3">
-                            <h5>Parent Name</h5>
-                            <i>Profession</i>
-                        </div>
-                    </div>
-                    <div class="bg-light shadow-sm rounded mb-4 p-4">
-                        <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                        Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                        eirmod clita lorem. Dolor tempor ipsum clita
-                    </div>
-                </div>
-                <div class="testimonial-item px-3 col-lg-3">
-                    <div class="d-flex align-items-center">
-                        <img class="rounded-circle" th:src="@{../../../upload/static/images/gallery/testimonial-3.jpg}"
-                             style="width: 70px; height: 70px" alt="Image"/>
-                        <div class="pl-3">
-                            <h5>Parent Name</h5>
-                            <i>Profession</i>
-                        </div>
-                    </div>
-                    <div class="bg-light shadow-sm rounded mb-4 p-4">
-                        <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                        Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                        eirmod clita lorem. Dolor tempor ipsum clita
-                    </div>
-                </div>
-                <div class="testimonial-item px-3 col-lg-3">
-                    <div class="d-flex align-items-center">
-                        <img class="rounded-circle" th:src="@{../../../upload/static/images/gallery/testimonial-4.jpg}"
-                             style="width: 70px; height: 70px" alt="Image"/>
-                        <div class="pl-3">
-                            <h5>Parent Name</h5>
-                            <i>Profession</i>
-                        </div>
-                    </div>
-                    <div class="bg-light shadow-sm rounded mb-4 p-4">
-                        <h3 class="fas fa-quote-left text-primary mr-3"></h3>
-                        Sed ea amet kasd elitr stet, stet rebum et ipsum est duo elitr
-                        eirmod clita lorem. Dolor tempor ipsum clita
+                        <span th:text="*{getContent()}"></span>
                     </div>
                 </div>
             </div>

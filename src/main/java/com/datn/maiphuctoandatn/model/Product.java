@@ -78,6 +78,8 @@ public class Product {
     @Column(name = "product_sold")
     public Integer ProductSold;
 
+    public String CreateFormatDate;
+
     @CreationTimestamp
     @Column(name = "created_at")
     public Timestamp Created_at;

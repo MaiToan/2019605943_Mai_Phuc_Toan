@@ -14,4 +14,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Query(value = "SELECT * FROM comment where product_id =:product_id", nativeQuery = true)
     public List<Comment> GetCommentByProduct(Long product_id);
+
+    @Query(value = "SELECT * FROM comment where top_comment = 1 and loevm = 0 ", nativeQuery = true)
+    public List<Comment> getTopComment();
 }
