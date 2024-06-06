@@ -37,4 +37,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "SELECT products.* FROM products inner join categories on products.category_id = categories.id where products.loevm = '0' AND ( products.name like %:Search% OR price like %:Search% or categories.name like %:Search%)", nativeQuery = true)
     List<Product> getAllProductBySearch(String Search);
 
+    @Query(value = "SELECT * FROM products where category_id =:id and loevm = 0", nativeQuery = true)
+    List<Product> findProductByIdCategory(Long id);
+
+    @Query(value = "SELECT * FROM products where name like %:name% and category_id =:id and loevm = 0", nativeQuery = true)
+    List<Product> findProductByIdAndNameCategory(Long id, String name);
 }

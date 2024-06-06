@@ -2,6 +2,7 @@ package com.datn.maiphuctoandatn.controller.admin;
 
 import com.datn.maiphuctoandatn.config.FileUploadUtil;
 import com.datn.maiphuctoandatn.model.Author;
+import com.datn.maiphuctoandatn.model.Order;
 import com.datn.maiphuctoandatn.model.Product;
 import com.datn.maiphuctoandatn.service.cls.ProductService;
 import com.datn.maiphuctoandatn.service.face.IAuthorService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +39,10 @@ public class ManageAuthorController {
             ListAuthor = authorService.getAllAuthors();
         } else {
             ListAuthor = authorService.findAuthorBySearch(searchAuthor);
+        }
+        for (Author author : ListAuthor) {
+            String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(author.getCreated_at());
+            author.setCreatedAtFormat(formatDate);
         }
         model.addAttribute("searchAuthor", searchAuthor);
         model.addAttribute("authors", ListAuthor);

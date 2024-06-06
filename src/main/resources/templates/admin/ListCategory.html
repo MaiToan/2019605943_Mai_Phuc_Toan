@@ -120,22 +120,20 @@
                 </div>
             </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul  class="navbar-nav ml-auto">
             <li>
                 <div class="dropdown drp-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon feather icon-settings"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-notification">
-                        <div class="pro-head">
-                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span>John Doe</span>
+                    <div style="padding: 0" class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div style="border-bottom: 1px solid #ccc" class="pro-head">
+                            <img style="max-width: 40px ; margin-left: 20px; margin-right: 10px" src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span style="font-weight: bold" >John Doe</span>
                         </div>
-                        <ul class="pro-body">
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                        <ul style="padding: 0" class="pro-body">
+                            <li style="list-style-type: none"><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/logout"  onclick="return confirm('Do you want to log out ?');" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Log
                                 out</a></li>
                         </ul>
                     </div>
@@ -172,8 +170,9 @@
                         </div>
                         <div class="col-xl-12">
                             <div class="card table-card">
-                                <div class="card-header">
+                                <div style="display: flex; justify-content: space-between; align-items: center" class="card-header">
                                     <h5>List Category</h5>
+                                    <a style="line-height: 25px" href="/admin/NewCategory" class="btn btn-primary btn-sm" > <i class="fas fa-plus-circle"></i>Add Category</a>
                                 </div>
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
@@ -185,6 +184,7 @@
                                                     <th>Image</th>
                                                     <th>Name</th>
 <!--                                                    <th>Description</th>-->
+                                                    <th>Created Date</th>
                                                     <th>Total products</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -193,9 +193,10 @@
                                                 <tr class="table_body_user" th:each="obj:${categories}" th:object="${obj}">
                                                     <td class="cl-user font-weight-bold" th:text="*{getId()}"></td>
                                                     <td th:if="*{getAvatar()!=null and getAvatar() != ''}"><img style="border-radius: 0"
-                                                            th:src="@{'/picture/' + *{Avatar} }"
+                                                            th:src="@{'../../../upload/static/images/gallery/' + *{Avatar} }"
                                                             alt=""></td>
                                                     <td class="cl-user" th:text="*{getName()}"></td>
+                                                    <td class="cl-user" th:text="*{getCreatedAtFormat()}"></td>
                                                     <td class="cl-user" th:text="*{getProductList().size()}"></td>
 <!--                                                    <td class="cl-user" style=""-->
 <!--                                                        th:if="*{getDescription()!=null and getDescription() != ''}"-->
@@ -203,7 +204,7 @@
 <!--                                                    <td class="cl-user"-->
 <!--                                                        th:if="*{getDescription()==null or getDescription() == ''}">Blank-->
 <!--                                                    </td>-->
-                                                    <td class="cl-user"><a href="">View</a></td>
+                                                    <td class="cl-user"><a th:href="@{'/admin/detail-category/' + *{id}}">View</a></td>
                                                 </tr>
 
                                                 </tbody>

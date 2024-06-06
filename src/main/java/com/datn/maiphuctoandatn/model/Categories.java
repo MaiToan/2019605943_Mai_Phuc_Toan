@@ -39,6 +39,8 @@ public class Categories {
     @Column(name = "description", length = 1000)
     public String Description ;
 
+    public String createdAtFormat;
+
     @Column(name = "loevm", length = 1)
     public String LOEVM ;
 

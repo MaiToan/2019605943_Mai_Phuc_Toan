@@ -36,6 +36,8 @@ public class Author {
     @Column(name = "loevm")
     public String LOEVM ;
 
+    public String createdAtFormat;
+
     @CreationTimestamp
     @Column(name = "created_at")
     public Timestamp Created_at;

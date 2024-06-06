@@ -258,7 +258,6 @@ public class ManageProductController {
             product.setImage(fileName);
         }
         List<Author> authorList = (List<Author>) request.getSession().getAttribute("author-product");
-        product.setProductNumber(0);
         product.setLoevm("0");
         product.setProductSold(0);
         productService.saveProduct(product, authorList);

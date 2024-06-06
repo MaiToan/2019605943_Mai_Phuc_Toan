@@ -59,7 +59,6 @@ public class Order {
     @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss")
     public Timestamp OrderDate;
 
-    @Column(name = "format_date")
     public String OrderDateFormat;
 
     @Column(name = "note", length = 200)

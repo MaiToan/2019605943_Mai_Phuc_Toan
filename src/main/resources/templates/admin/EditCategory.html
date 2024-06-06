@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin New Product</title>
+    <title>Admin Edit category</title>
     <![endif]-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -149,48 +149,25 @@
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="index.html"><i
                                                     class="feather icon-home"></i></a></li>
-                                            <li class="breadcrumb-item"><a href="#">Add product</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Edit Category</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-7 box-edit">
-                            <h3 style="font-size: 30px">Add product</h3>
-                            <div style="max-width: 100%; margin: 15px 0; display: flex; justify-content: start; align-items: center; flex-wrap: wrap">
-                                <div class="card-author" th:each="obj:${authorCard}" th:object="${obj}"
-                                     style="display: flex; justify-content: start; align-items: center; margin: 5px">
-                                    <span style="font-size: 14px" th:text="*{getName()}"></span>
-                                    <form th:action="@{/admin/remove-author-add}" method="post">
-                                        <input type="hidden" name="id_author" th:value="*{getId()}">
-                                        <input type="hidden" name="id_product" th:value="${product.getId()}">
-                                        <input style="padding: 2px 5px" class="btn btn-sm border text-light m-0 ml-2" type="submit" value="X">
-                                    </form>
-                                </div>
-                            </div>
-                            <form th:action="@{/admin/choose-author-add}" method="post" class="box-choose">
-                                <div style="margin-bottom: 0" class="form-group">
-                                    <!--                                <label for="des-product">Stock</label>-->
-                                    <label style="width: 100%"> Authors
-                                        <select name="choose-author" class="mb-3 form-control">
-                                            <option th:each="obj:${authorList}" th:object="${obj}"
-                                                    th:text="*{getName()}" th:value="*{getId()}"></option>
-                                        </select>
-                                    </label>
-                                </div>
-                                <input class="btn btn-success btn-sm" type="submit" value="Choose">
-                            </form>
-                            <form action="#" th:action="@{/admin/add-product}" enctype="multipart/form-data"
-                                  th:object="${product}" method="post">
+                            <h3 style="font-size: 30px">Edit Category</h3>
+                            <form action="#" th:action="@{/admin/edit-category}" enctype="multipart/form-data"
+                                  th:object="${category}" method="post">
                                 <div style=" margin: 10px 0">
-                                    <p style="font-size: 17px; margin-bottom: 10px">Image</p>
+                                    <p style="font-size: 17px; margin-bottom: 10px">Avatar</p>
                                     <div style="display: flex; justify-content: start; align-items: center ;">
                                         <div style="width: 80px ; height: 100px; margin-right: 30px; ">
-                                            <img id="uploadPreview" th:src="@{'../../../upload/static/images/gallery/' + *{getImage()} }" alt="">
+                                            <img id="uploadPreview" th:src="@{'../../../upload/static/images/gallery/' + *{getAvatar()} }" alt="">
 
                                         </div>
                                         <div class="border bg0 m-b-50">
-                                            <input id="uploadImage" name="image_product"
+                                            <input id="uploadImage" name="image_category"
                                                    class="stext-111 cl8 plh3 size-111 p-lr-15"
                                                    type="file" onchange="PreviewImage();"
                                                    accept="image/png, image/jpeg, image/jpg">
@@ -198,36 +175,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="name-product">Product Name</label>
-                                    <input th:field="*{Name}" required type="text" class="form-control" id="name-product">
+                                    <input th:field="*{id}" type="hidden" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <label for="price-product">Price</label>
-                                    <input step="0.1" th:field="*{price}" required type="number" class="form-control"
-                                           id="price-product">
+                                    <label for="id-category">Category ID</label>
+                                    <input th:field="*{id}" disabled type="text" class="form-control" id="id-category">
                                 </div>
                                 <div class="form-group">
-                                    <label for="sale-product">Sale</label>
-                                    <input step="0.1" th:field="*{sale}" disabled type="number" class="form-control"
-                                           id="sale-product">
+                                    <label for="name-category">Category Name</label>
+                                    <input th:field="*{Name}" required type="text" class="form-control" id="name-category">
                                 </div>
                                 <div class="form-group">
-                                    <label for="des-product">Product Description</label>
-                                    <textarea th:field="*{description}" required maxlength="500" cols="30" rows="5" class="form-control"
-                                              id="des-product"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="stock-product">Stock</label>
-                                    <input th:field="*{productNumber}" value="0" required type="number" class="form-control"
-                                           id="stock-product">
-                                </div>
-                                <div class="form-group">
-                                    <label style="width: 100%"> Category
-                                        <select th:field="*{categories.id}" class="mb-3 form-control">
-                                            <option th:each="obj:${categoriesList}"
-                                                    th:text="${obj.name}" th:value="${obj.id}"></option>
-                                        </select>
-                                    </label>
+                                    <label for="des-category">Category Description</label>
+                                    <textarea th:field="*{description}" required maxlength="1000" cols="30" rows="5" class="form-control"
+                                              id="des-category"></textarea>
                                 </div>
                                 <input class="btn btn-success" type="submit" value="Save">
                             </form>

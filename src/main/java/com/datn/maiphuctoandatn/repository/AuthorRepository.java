@@ -8,12 +8,12 @@ import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Query(value = "SELECT * FROM authors WHERE loevm = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM authors WHERE loevm = 0 order by created_at desc", nativeQuery = true)
     List<Author> findAllAuthor();
 
     @Query(value = "SELECT * FROM authors WHERE id=:id AND loevm = 0", nativeQuery = true)
     Author getAuthorById(Long id);
 
-    @Query(value = "SELECT * FROM authors WHERE name like %:search% or email like %:search% or address like %:search% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM authors WHERE (name like %:search% or email like %:search% or address like %:search%) and loevm = 0 order by created_at desc", nativeQuery = true)
     List<Author> getAuthorBySearch(String search);
 }

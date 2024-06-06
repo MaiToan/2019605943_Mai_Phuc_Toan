@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Admin Detail Product</title>
+    <title>Admin Edit Product</title>
     <![endif]-->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -113,16 +113,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon feather icon-settings"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-notification">
-                        <div class="pro-head">
-                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span>John Doe</span>
+                    <div style="padding: 0" class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div style="border-bottom: 1px solid #ccc" class="pro-head">
+                            <img style="max-width: 40px ; margin-left: 20px; margin-right: 10px" src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span style="font-weight: bold" >John Doe</span>
                         </div>
-                        <ul class="pro-body">
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                        <ul style="padding: 0" class="pro-body">
+                            <li style="list-style-type: none"><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/logout"  onclick="return confirm('Do you want to log out ?');" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Log
                                 out</a></li>
                         </ul>
                     </div>
@@ -207,26 +205,26 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name-product">Product Name</label>
-                                    <input th:field="*{Name}" type="text" class="form-control" id="name-product">
+                                    <input th:field="*{Name}" required type="text" class="form-control" id="name-product">
                                 </div>
                                 <div class="form-group">
                                     <label for="price-product">Price</label>
-                                    <input step="0.1" th:field="*{price}" type="number" class="form-control"
+                                    <input step="0.1" th:field="*{price}" required type="number" class="form-control"
                                            id="price-product">
                                 </div>
                                 <div class="form-group">
                                     <label for="sale-product">Sale</label>
-                                    <input step="0.1" th:field="*{sale}" type="number" class="form-control"
+                                    <input step="0.1" th:field="*{sale}" required type="number" class="form-control"
                                            id="sale-product">
                                 </div>
                                 <div class="form-group">
                                     <label for="des-product">Product Description</label>
-                                    <textarea th:field="*{description}" maxlength="500" cols="30" rows="5" class="form-control"
+                                    <textarea th:field="*{description}" required maxlength="500" cols="30" rows="5" class="form-control"
                                               id="des-product"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="stock-product">Stock</label>
-                                    <input th:field="*{productNumber}" type="number" class="form-control"
+                                    <input th:field="*{productNumber}" required type="number" class="form-control"
                                            id="stock-product">
                                 </div>
                                 <div class="form-group">

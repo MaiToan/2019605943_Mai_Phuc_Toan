@@ -2,6 +2,7 @@ package com.datn.maiphuctoandatn.repository;
 
 import com.datn.maiphuctoandatn.model.Author;
 import com.datn.maiphuctoandatn.model.Categories;
+import com.datn.maiphuctoandatn.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -18,9 +19,10 @@ public interface CategoryRepository extends JpaRepository<Categories, Long> {
     @Query(value = "SELECT * FROM categories where loevm = 0 and id=:id", nativeQuery = true)
     Categories getCategoryByID(Long id);
 
-    @Query(value = "SELECT * FROM categories where loevm = 0", nativeQuery = true)
+    @Query(value = "SELECT * FROM categories where loevm = 0 order by created_at desc", nativeQuery = true)
     List<Categories> getAll();
 
-    @Query(value = "SELECT * FROM categories where loevm = 0 and ( id like %:search% or name like %:search%) ", nativeQuery = true)
+    @Query(value = "SELECT * FROM categories where loevm = 0 and ( id like %:search% or name like %:search%) order by created_at desc", nativeQuery = true)
     List<Categories> GetCategoryBySearch(String search);
+
 }

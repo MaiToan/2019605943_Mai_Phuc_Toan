@@ -118,16 +118,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon feather icon-settings"></i>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right profile-notification">
-                        <div class="pro-head">
-                            <img src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span>John Doe</span>
+                    <div style="padding: 0" class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div style="border-bottom: 1px solid #ccc" class="pro-head">
+                            <img style="max-width: 40px ; margin-left: 20px; margin-right: 10px" src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
+                            <span style="font-weight: bold" >John Doe</span>
                         </div>
-                        <ul class="pro-body">
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i> Settings</a>
-                            </li>
-                            <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
-                            <li><a href="message.html" class="dropdown-item"><i class="feather icon-mail"></i> Log
+                        <ul style="padding: 0" class="pro-body">
+                            <li style="list-style-type: none"><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/logout"  onclick="return confirm('Do you want to log out ?');" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Log
                                 out</a></li>
                         </ul>
                     </div>
@@ -194,7 +192,7 @@
                                             <div class="col-5">
                                                 <div class="Info_cus">
                                                     <img th:if="${Order.getUser_order().getAvatar() != null}"
-                                                         th:src="@{'/picture/' + ${Order.getUser_order().getAvatar()}}" alt="">
+                                                         th:src="@{'../../../upload/static/images/gallery/' + ${Order.getUser_order().getAvatar()}}" alt="">
                                                     <img th:if="${Order.getUser_order().getAvatar() == null}"
                                                          src="/images/gallery/NormalAvatar.jpg" alt="">
                                                     <div class="text_info_cus">
@@ -303,7 +301,7 @@
                                                                         <td th:text="*{getProductOrder().getId()}"></td>
                                                                         <td><img
                                                                                 style="max-width: 40px; border: 1px solid #ccc"
-                                                                                th:src="@{'/picture/' + *{getProductOrder().getImage()}}"
+                                                                                th:src="@{'../../../upload/static/images/gallery/' + *{getProductOrder().getImage()}}"
                                                                                 alt=""></td>
                                                                         <td th:text="*{getProductOrder().getName()}"></td>
                                                                         <td th:text="*{getQuantity()}"></td>

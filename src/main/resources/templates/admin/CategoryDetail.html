@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Author detail</title>
+    <title>Category Detail</title>
     <!--    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
     <!--    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
     <meta charset="utf-8">
@@ -21,14 +21,14 @@
     <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
     <link th:href="@{/css/DetailProduct.css}" rel="stylesheet"/>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
-<style>
-    @media (max-width: 1200px) {
-        .btn-product {
-            flex-direction: column;
-            width: auto !important;
+    <style>
+        @media (max-width: 1200px) {
+            .btn-product {
+                flex-direction: column;
+                width: auto !important;
+            }
         }
-    }
-</style>
+    </style>
 </head>
 
 <body class="">
@@ -160,7 +160,7 @@
                                         <ul class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="index.html"><i
                                                     class="feather icon-home"></i></a></li>
-                                            <li class="breadcrumb-item"><a href="#">Detail Author</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Detail Category</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -171,23 +171,23 @@
                             <div class="container">
                                 <div class="text-center pb-2">
                                     <p class="section-title px-5">
-                                        <span class="px-2">Our Product Author</span>
+                                        <span class="px-2">Our Product Category</span>
                                     </p>
-                                    <h1 class="mb-4">Author</h1>
+                                    <h1 class="mb-4">Category</h1>
                                 </div>
                                 <div style="width: 100% ; right: 15px; z-index: 1000; top:10px"
                                      class="d-flex justify-content-end position-absolute btn-product">
                                     <div class=" rounded bg-warning text-light m-2 p-1 px-2">
-                                        <a class="text-light btn-sm " th:href="@{'/admin/edit-author/'+ *{id}}"><i
+                                        <a class="text-light btn-sm " th:href="@{'/admin/edit-category/'+ *{id}}"><i
                                                 class="fas fa-edit"></i> Edit
-                                            Author</a>
+                                            Category</a>
                                     </div>
                                     <div class="box-btn bg-danger rounded m-2 p-1 px-2">
-                                        <form th:action="@{/admin/delete-author}" method="post">
-                                            <input name="id" th:value="${author.getId()}" type="hidden">
-                                            <button onclick="return confirm('Do you want to delete Author ?');" type="submit"
+                                        <form th:action="@{/admin/delete-category}" method="post">
+                                            <input name="id" th:value="${category.getId()}" type="hidden">
+                                            <button onclick="return confirm('Do you want to delete Category ?');" type="submit"
                                                     class="btn-sm bg-danger text-light "><i class="fas fa-trash-alt mr-1"></i>
-                                                Delete Author
+                                                Delete Category
                                             </button>
                                         </form>
                                     </div>
@@ -196,7 +196,7 @@
                                 <div class="container-fluid">
                                     <div class="container">
                                         <div style="justify-content: center; flex-direction: column ; align-items: center"
-                                             th:object="${author}" class="row">
+                                             th:object="${category}" class="row">
                                             <div class="col-md-6 col-lg-3 text-center team mb-3">
                                                 <div class="position-relative overflow-hidden mb-4"
                                                      style="border-radius: 100%">
@@ -205,7 +205,6 @@
                                                          alt=""/>
                                                 </div>
                                                 <h4 th:text="*{Name}"></h4>
-                                                <i th:text="*{Address}"></i>
                                             </div>
                                             <div class="col-md-8 col-lg-6 text-center team mb-5">
                                                 <span class="text-" th:text="*{Description}"></span>
@@ -219,7 +218,7 @@
                             <div class="container">
                                 <div class="heading_container heading_center">
                                     <h2 class="text-center">
-                                        Author <span>products</span>
+                                        Category <span>products</span>
                                     </h2>
                                 </div>
                                 <div class="box_search container-fluid ml-2 mr-2">
