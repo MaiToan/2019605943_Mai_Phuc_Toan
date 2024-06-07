@@ -20,4 +20,21 @@ public class PostService implements IPostService {
         List<Post> posts = postRepository.getAll();
         return posts.get(random.nextInt(posts.size()));
     }
+
+    @Override
+    public List<Post> getAll() {
+        return postRepository.getAll();
+    }
+
+    @Override
+    public void save(Post post) {
+        postRepository.save(post);
+    }
+
+    @Override
+    public void delete(Long id) {
+        Post post = postRepository.findById(id).get();
+        post.setLOEVM("1");
+        postRepository.save(post);
+    }
 }

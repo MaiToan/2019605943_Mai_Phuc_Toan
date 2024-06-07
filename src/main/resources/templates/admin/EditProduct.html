@@ -25,7 +25,7 @@
 <nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
     <div class="navbar-wrapper ">
         <div class="navbar-brand header-logo">
-            <a href="index.html" class="b-brand">
+            <a href="/admin/Home" class="b-brand">
                 <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
                 <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
             </a>
@@ -78,10 +78,8 @@
                 <li class="nav-item pcoded-menu-caption">
                     <label>Pages</label>
                 </li>
-                <li class="nav-item"><a href="sample-page.html" class="nav-link"><span class="pcoded-micon"><i
-                        class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
-                <li class="nav-item "><a href="#" class="nav-link"><span class="pcoded-micon"><i
-                        class="fas fa-store-alt"></i>
+                <li class="nav-item"><a href="/admin/ListPosts" class="nav-link"><span class="pcoded-micon"><i class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="/admin/Store" class="nav-link"><span class="pcoded-micon"><i class="fas fa-store-alt"></i>
                 </span><span class="pcoded-mtext">Store</span></a></li>
             </ul>
         </div>
@@ -115,11 +113,14 @@
                     </a>
                     <div style="padding: 0" class="dropdown-menu dropdown-menu-right profile-notification">
                         <div style="border-bottom: 1px solid #ccc" class="pro-head">
-                            <img style="max-width: 40px ; margin-left: 20px; margin-right: 10px" src="../../../upload/static/images/gallery/user.jpg" class="img-radius" alt="User-Profile-Image">
-                            <span style="font-weight: bold" >John Doe</span>
+                            <img style="max-width: 40px !important; max-height: 40px ; margin-left: 20px; margin-right: 10px; box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;"
+                                 th:src="@{'../../../upload/static/images/gallery/' + ${user.getAvatar()}}" class="img-radius"
+                                 alt="User-Profile-Image">
+                            <span th:text="${user.getName()}" style="font-weight: bold">John Doe</span>
                         </div>
                         <ul style="padding: 0" class="pro-body">
-                            <li style="list-style-type: none"><a href="#" class="dropdown-item"><i class="feather icon-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/admin/account-admin" class="dropdown-item"><i class="fas fa-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/admin/change-password" class="dropdown-item"><i class="fas fa-key"></i> Change password</a></li>
                             <li style="list-style-type: none"><a href="/logout"  onclick="return confirm('Do you want to log out ?');" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Log
                                 out</a></li>
                         </ul>
@@ -179,7 +180,7 @@
                                     </label>
                                 </div>
                                 <input type="hidden" name="id_product" th:value="${product.getId()}">
-                                <input class="btn btn-success btn-sm" type="submit" value="Choose">
+                                <input style="background-color: #3b98ff" class="btn btn-primary btn-sm" type="submit" value="Choose">
                             </form>
                             <form action="#" th:action="@{/admin/update-product}" enctype="multipart/form-data"
                                   th:object="${product}" method="post">
@@ -235,7 +236,7 @@
                                         </select>
                                     </label>
                                 </div>
-                                <input class="btn btn-success" type="submit" value="Update">
+                                <input style="background-color: #3b98ff" class="btn btn-success" type="submit" value="Update">
                             </form>
                         </div>
                         <!-- sessions-section end -->

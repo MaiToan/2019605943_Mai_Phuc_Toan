@@ -68,7 +68,10 @@ public class CategoryController {
         Integer SizeProduct = (Integer) request.getSession().getAttribute("myCartNum");
         String NotiMessage = (String) request.getSession().getAttribute("noti_message");
         request.getSession().setAttribute("noti_message", null);
-
+        for (Product product : LsProduct) {
+            String price = String.format("%.1f", product.getPrice()-product.getSale());
+            product.setUnitPrice(price);
+        }
         model.addAttribute("noti_message", NotiMessage);
         model.addAttribute("size_cart", SizeProduct);
         model.addAttribute("store", store);

@@ -145,7 +145,7 @@
                                 </div>
                                 <div class="detail-box flex-column justify-content-center">
                                     <h5 th:text="*{Name}"></h5>
-                                    <h6 style="color: crimson ; font-size: 1.4rem" th:text="'$' + *{Price - Sale}"></h6>
+                                    <h6 style="color: crimson ; font-size: 1.4rem" th:text="'$' + *{getUnitPrice()}"></h6>
                                 </div>
                             </div>
                         </div>

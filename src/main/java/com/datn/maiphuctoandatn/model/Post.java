@@ -29,6 +29,9 @@ public class Post {
     @Column(name = "loevm")
     public String LOEVM ;
 
+    public String Created_at_format;
+
+
     @CreationTimestamp
     @Column(name = "created_at")
     public Timestamp Created_at;

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Admin Store</title>
+    <![endif]-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="icon" th:href="@{/assets/images/favicon.ico}" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" th:href="@{/assets/fonts/fontawesome/css/fontawesome-all.min.css}">
+    <!-- animation css -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/animation/css/animate.min.css}">
+    <!-- vendor css -->
+    <link rel="stylesheet" th:href="@{/css/HomeAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/OrderDetail.css}">
+    <link th:href="@{/css/HomeStyle.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+
+<body class="">
+<!-- [ navigation menu ] start -->
+<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+    <div class="navbar-wrapper ">
+        <div class="navbar-brand header-logo">
+            <a href="/admin/Home" class="b-brand">
+                <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+                <img style="max-width: 50px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+            </a>
+            <a class="mobile-menu" id="mobile-collapse" href="#"><span></span></a>
+        </div>
+        <div class="navbar-content scroll-div">
+            <ul class="nav pcoded-inner-navbar">
+                <li class="nav-item">
+                    <a href="../../admin/Home" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Orders</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListOrders" class="nav-link"><span class="pcoded-micon"><i
+                            class="feather icon-file-text"></i></span><span
+                            class="pcoded-mtext">List Orders</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Users</label>
+                </li>
+                <li class="nav-item">
+                    <a href="../../admin/ListUser" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-users"></i></span>
+                        <span class="pcoded-mtext">List Users</span></a>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Products</label>
+                </li>
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                            class="fas fa-shopping-bag"></i></span><span class="pcoded-mtext">Related to products</span></a>
+                    <ul class="pcoded-submenu">
+                        <li class="nav-item">
+                            <a href="../../admin/ListProducts" class="nav-link active"><span class="pcoded-micon"><i
+                                    class="fas fa-book"></i></span><span class="pcoded-mtext">List Books</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListAuthor" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-user-graduate"></i></span><span
+                                    class="pcoded-mtext">List Authors</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../admin/ListCategory" class="nav-link"><span class="pcoded-micon"><i
+                                    class="fas fa-list"></i></span><span class="pcoded-mtext">Categories</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item pcoded-menu-caption">
+                    <label>Pages</label>
+                </li>
+                <li class="nav-item"><a href="/admin/ListPosts" class="nav-link"><span class="pcoded-micon"><i class="far fa-newspaper"></i></span><span class="pcoded-mtext">Posts</span></a></li>
+                <li class="nav-item "><a href="/admin/Store" class="nav-link"><span class="pcoded-micon"><i class="fas fa-store-alt"></i>
+                </span><span class="pcoded-mtext">Store</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
+    <div class="m-header">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="index.html" class="b-brand">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo images">
+            <img style="max-width: 60px" src="../../../upload/static/images/gallery/Logo.png" alt="" class="logo-thumb images">
+        </a>
+    </div>
+    <a class="mobile-menu" id="mobile-header" href="#">
+        <i class="feather icon-more-horizontal"></i>
+    </a>
+    <div class="collapse navbar-collapse">
+        <a href="#" class="mob-toggler"></a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <div class="main-search open">
+
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li>
+                <div class="dropdown drp-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon feather icon-settings"></i>
+                    </a>
+                    <div style="padding: 0" class="dropdown-menu dropdown-menu-right profile-notification">
+                        <div style="border-bottom: 1px solid #ccc" class="pro-head">
+                            <img style="max-width: 40px !important; max-height: 40px ; margin-left: 20px; margin-right: 10px; box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;"
+                                 th:src="@{'../../../upload/static/images/gallery/' + ${user.getAvatar()}}" class="img-radius"
+                                 alt="User-Profile-Image">
+                            <span th:text="${user.getName()}" style="font-weight: bold">John Doe</span>
+                        </div>
+                        <ul style="padding: 0" class="pro-body">
+                            <li style="list-style-type: none"><a href="/admin/account-admin" class="dropdown-item"><i class="fas fa-user"></i> Profile</a></li>
+                            <li style="list-style-type: none"><a href="/admin/change-password" class="dropdown-item"><i class="fas fa-key"></i> Change password</a></li>
+                            <li style="list-style-type: none"><a href="/logout"  onclick="return confirm('Do you want to log out ?');" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Log
+                                out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</header>
+<!-- [ Header ] end -->
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container position-relative">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ breadcrumb ] start -->
+                        <div class="page-header">
+                            <div class="page-block">
+                                <div class="row align-items-center">
+                                    <div class="col-md-12">
+                                        <div class="page-header-title">
+                                            <h5>Home</h5>
+                                        </div>
+                                        <ul class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html"><i
+                                                    class="feather icon-home"></i></a></li>
+                                            <li class="breadcrumb-item"><a href="#">store</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 box-edit">
+                            <form action="#" th:action="@{/admin/edit-category}" enctype="multipart/form-data"
+                                  th:object="${store}" method="post">
+                                <div style=" margin: 10px 0">
+                                    <div style="display: flex; justify-content: start; align-items: center ;">
+                                        <p style="font-size: 17px; margin-bottom: 10px">Logo</p>
+                                        <div style="width: 80px ; height: 100px; margin-left: 30px; border: 1px solid #ccc">
+                                            <img style="max-width: 80px; max-height: 100px" th:src="@{'../../../upload/static/images/gallery/' + *{getLogo()} }" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div style="display: flex; justify-content: start; align-items: center ;">
+                                        <p style="font-size: 17px; margin-bottom: 10px">Image</p>
+                                        <div style="width: 80px ; height: 100px; margin-right: 30px; ">
+                                            <img style="max-width: 80px; max-height: 100px" th:src="@{'../../../upload/static/images/gallery/' + *{getImage()} }" alt="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Store Name</label>
+                                    <input th:field="*{Name}" disabled type="text" class="form-control" >
+                                </div>
+                                <div class="form-group">
+                                    <label>Store Email</label>
+                                    <input th:field="*{Email}" disabled type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Store Phone</label>
+                                    <input th:field="*{Phone}" disabled type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Store Address</label>
+                                    <input th:field="*{Address}" disabled type="text" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Store Phone</label>
+                                    <textarea cols="40" rows="7" th:field="*{Description}" disabled type="text" class="form-control"></textarea>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/pcoded.min.js"></script>
+<script th:src="@{/js/onchangeInputFile.js}"></script>
+
+</body>
+
+</html>

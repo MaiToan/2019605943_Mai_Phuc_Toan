@@ -159,12 +159,19 @@
                         <div class="cart-detail">
                             <h2>Cart Total</h2>
                             <ul>
+                                <li style="display: flex; justify-content: start; align-items: center" >
+                                    <span class="font-weight-bold">Name product</span>
+                                    <span class="font-weight-bold" style="width: 20px"></span>
+                                    <span class="font-weight-bold">Quantity</span>
+                                    <span class="font-weight-bold">Price</span>
+                                    <span class="font-weight-bold">Total</span>
+                                </li>
                                 <li style="display: flex; justify-content: start; align-items: center"
                                     th:each="obj:${cart}" th:object="${obj}">
                                     <span th:text="*{getProduct().Name}"></span>
                                     <span style="width: 20px">x</span>
                                     <span th:text="*{getQuantity()}" style="width: 50px">x</span>
-                                    <span th:text="*{'$' + ( getProduct().Price - getProduct().Sale )}">$99.00</span>
+                                    <span th:text="*{'$' + ( getProduct().getUnitPrice() )}">$99.00</span>
                                     <span th:text="*{'$'+( getProduct().Price - getProduct().Sale )*getQuantity()}">$99.00</span>
                                 </li>
 

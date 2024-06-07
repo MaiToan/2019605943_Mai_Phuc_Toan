@@ -1,6 +1,7 @@
 package com.datn.maiphuctoandatn.controller.admin;
 
 import com.datn.maiphuctoandatn.model.Order;
+import com.datn.maiphuctoandatn.model.User;
 import com.datn.maiphuctoandatn.search.SearchOrder;
 import com.datn.maiphuctoandatn.service.face.IOrderDetailService;
 import com.datn.maiphuctoandatn.service.face.IOrderService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -19,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-//@RequestMapping("admin")
+@RequestMapping("admin")
 public class HomeAdminController {
 
     @Autowired
@@ -31,7 +33,7 @@ public class HomeAdminController {
     @Autowired
     IOrderDetailService orderDetailService;
 
-    @GetMapping("/admin/Home")
+    @GetMapping("/Home")
     public String HomeAdmin(Model model , HttpServletRequest request, @ModelAttribute("SearchOrder") SearchOrder searchOrder) {
 //        user
         Integer NumberUser = userService.getAllUsers().size();
@@ -67,6 +69,8 @@ public class HomeAdminController {
             String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(order.getOrderDate());
             order.setOrderDateFormat(formatDate);
         }
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("searchOrder", searchOrder);
         model.addAttribute("NumberUser", NumberUser);
         model.addAttribute("CompareLastMonth", CompareLastMonth);

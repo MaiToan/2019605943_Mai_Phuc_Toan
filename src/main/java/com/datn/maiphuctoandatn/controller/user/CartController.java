@@ -60,6 +60,8 @@ public class CartController {
 
         if (HashCart != null) {
             for (SessionCart item : HashCart.values()) {
+                String price = String.format("%.1f", item.getProduct().getPrice() - item.getProduct().getSale());
+                item.getProduct().setUnitPrice(price);
                 lsCart.add(item);
             }
         }

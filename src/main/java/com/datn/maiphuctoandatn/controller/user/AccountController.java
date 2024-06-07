@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -114,12 +115,17 @@ public class AccountController {
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam("image") MultipartFile multipartFile, HttpServletRequest request
     ) throws IOException {
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-        user.setAvatar(fileName);
+        String CheckFile = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        String fileName = "";
+        if (!CheckFile.isEmpty()) {
+            fileName = String.valueOf(new Date().getTime()) + ".jpg";
+            user.setAvatar(fileName);
+        }
         User userUpdate = userService.updateUser(user);
-        if (!fileName.isEmpty()) {
+        if (!CheckFile.isEmpty()) {
             String uploadDir = "src/main/upload/static/images/gallery";
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
         }
         request.getSession().setAttribute("session_user", userUpdate);
         request.getSession().setAttribute("noti_message", "Update information successful");

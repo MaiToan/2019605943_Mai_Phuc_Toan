@@ -2,6 +2,7 @@ package com.datn.maiphuctoandatn.controller.admin;
 
 import com.datn.maiphuctoandatn.model.Order;
 import com.datn.maiphuctoandatn.model.OrderDetail;
+import com.datn.maiphuctoandatn.model.User;
 import com.datn.maiphuctoandatn.search.SearchOrder;
 import com.datn.maiphuctoandatn.service.face.IOrderDetailService;
 import com.datn.maiphuctoandatn.service.face.IOrderService;
@@ -59,7 +60,8 @@ public class ManageOrdersController {
             ListOrder = null;
             ListOrder = ListOrderTemporary;
         }
-
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("searchOrder", searchOrder);
         model.addAttribute("orders", ListOrder);
         model.addAttribute("OrderFilter", orderFilter);
@@ -75,6 +77,11 @@ public class ManageOrdersController {
         String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(order.getOrderDate());
         order.setOrderDateFormat(formatDate);
 
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("orderDetails", orderDetails);
         model.addAttribute("Order", order);
         model.addAttribute("dateTime", dateTime);
@@ -87,6 +94,7 @@ public class ManageOrdersController {
         Order orderDb = orderService.findOrderById(id);
         orderDb.setStatus(order.getStatus());
         orderService.update(orderDb);
+        request.getSession().setAttribute("noti_message", "changed status order successfully");
         return "redirect:/admin/OrderDetail/" + id;
 
     }

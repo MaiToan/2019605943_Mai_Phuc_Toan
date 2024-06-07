@@ -4,6 +4,7 @@ import com.datn.maiphuctoandatn.config.FileUploadUtil;
 import com.datn.maiphuctoandatn.model.Author;
 import com.datn.maiphuctoandatn.model.Order;
 import com.datn.maiphuctoandatn.model.Product;
+import com.datn.maiphuctoandatn.model.User;
 import com.datn.maiphuctoandatn.service.cls.ProductService;
 import com.datn.maiphuctoandatn.service.face.IAuthorService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,13 +45,20 @@ public class ManageAuthorController {
             String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(author.getCreated_at());
             author.setCreatedAtFormat(formatDate);
         }
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("searchAuthor", searchAuthor);
         model.addAttribute("authors", ListAuthor);
         return "admin/ListAuthor";
     }
 
     @GetMapping("/NewAuthor")
-    public String NewAuthor(Model model) {
+    public String NewAuthor(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("author", new Author());
         return "admin/AddAuthor";
     }
@@ -70,6 +78,7 @@ public class ManageAuthorController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "add new author successfully");
         return "redirect:/admin/ListAuthor";
     }
 
@@ -78,7 +87,11 @@ public class ManageAuthorController {
                                @ModelAttribute("keyword") String name, @ModelAttribute("sort") String option_sort, @PathVariable("id") Long id) {
         Author author = authorService.getAuthorById(id);
         Page<Product> LsProduct = productService.getAllProductByAuthor(id, option_sort, name, pageNo, 15);
-
+        User user = (User) request.getSession().getAttribute("session_admin");
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        model.addAttribute("user", user);
         model.addAttribute("curentPage", pageNo);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("TotalPages", LsProduct.getTotalPages());
@@ -91,16 +104,19 @@ public class ManageAuthorController {
     }
 
     @PostMapping("/delete-author")
-    public String DeleteAuthor(@ModelAttribute("id") Long id) {
+    public String DeleteAuthor(@ModelAttribute("id") Long id, HttpServletRequest request) {
         Author author = authorService.getAuthorById(id);
         author.setLOEVM("1");
         authorService.deleteAuthor(author);
+        request.getSession().setAttribute("noti_message", "delete author successfully");
         return "redirect:/admin/ListAuthor";
     }
 
     @GetMapping("/edit-author/{id}")
-    public String editAuthor(Model model, @PathVariable("id") Long id) {
+    public String editAuthor(Model model, @PathVariable("id") Long id, HttpServletRequest request) {
         Author author = authorService.getAuthorById(id);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("author", author);
         return "/admin/EditAuthor";
     }
@@ -119,6 +135,7 @@ public class ManageAuthorController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "update author successfully");
         return "redirect:/admin/detail-author/" + author.getId();
     }
 }

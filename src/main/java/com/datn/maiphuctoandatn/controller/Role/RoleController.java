@@ -23,6 +23,10 @@ public class RoleController {
             request.getSession().setAttribute("session_admin", user);
             return "redirect:/admin/Home";
         }
+        if (user.getActive() == 0){
+            request.getSession().setAttribute("noti_message", "User has lock by admin");
+            return "redirect:/login";
+        }
         request.getSession().setAttribute("session_user", user);
         return "redirect:/Home";
     }

@@ -129,7 +129,7 @@
                                         </a>
                                     </td>
                                     <td style="padding-right: 30px" th:text="*{getProduct().Name}" class="column-2">Fresh Strawberries</td>
-                                    <td th:text="'$' + *{getProduct().Price - getProduct().Sale}" class="column-3">$ 36.00</td>
+                                    <td th:text="'$' + *{getProduct().UnitPrice}" class="column-3">$ 36.00</td>
                                     <form th:action="@{/update-quantity}" method="post">
                                         <td style="height: 185px" class="dis-flex flex-row align-items-center column-4">
                                             <div class="wrap-num-product flex-w m-l-auto m-r-0">

@@ -251,7 +251,7 @@
                             <h5 th:text="*{Name}">
                                 Men's Shirt
                             </h5>
-                            <h5 th:text="'$' + *{Price - Sale}" style="color: #c82333">
+                            <h5 th:text="'$' + *{getUnitPrice()}" style="color: #c82333">
                                 $75
                             </h5>
                         </div>

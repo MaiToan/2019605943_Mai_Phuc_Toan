@@ -5,6 +5,7 @@ import com.datn.maiphuctoandatn.config.FileUploadUtil;
 import com.datn.maiphuctoandatn.model.Author;
 import com.datn.maiphuctoandatn.model.Categories;
 import com.datn.maiphuctoandatn.model.Product;
+import com.datn.maiphuctoandatn.model.User;
 import com.datn.maiphuctoandatn.service.face.ICategoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class ManageCategoryController {
             String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(categories.getCreated_at());
             categories.setCreatedAtFormat(formatDate);
         }
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("searchCategory", searchCategory);
         model.addAttribute("categories", ListCategory);
         return "admin/ListCategory";
@@ -52,7 +58,11 @@ public class ManageCategoryController {
                                @ModelAttribute("keyword") String name, @ModelAttribute("sort") String option_sort, @PathVariable("id") Long id) {
         Categories category = categoryService.getCategoryById(id);
         Page<Product> LsProduct = categoryService.getAllProductByCategory(id, option_sort, name, pageNo, 15);
-
+        User user = (User) request.getSession().getAttribute("session_admin");
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        model.addAttribute("user", user);
         model.addAttribute("curentPage", pageNo);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("TotalPages", LsProduct.getTotalPages());
@@ -65,8 +75,10 @@ public class ManageCategoryController {
     }
 
     @GetMapping("/edit-category/{id}")
-    public String editCategory(Model model, @PathVariable("id") Long id) {
+    public String editCategory(Model model, @PathVariable("id") Long id, HttpServletRequest request) {
         Categories category = categoryService.getCategoryById(id);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("category", category);
         return "/admin/EditCategory";
     }
@@ -85,19 +97,23 @@ public class ManageCategoryController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "update category successfully");
         return "redirect:/admin/detail-category/" + category.getId();
     }
 
     @PostMapping("/delete-category")
-    public String DeleteCategory(@ModelAttribute("id") Long id) {
+    public String DeleteCategory(@ModelAttribute("id") Long id, HttpServletRequest request) {
         Categories category = categoryService.getCategoryById(id);
         category.setLOEVM("1");
         categoryService.deleteCategory(category);
+        request.getSession().setAttribute("noti_message", "delete category successfully");
         return "redirect:/admin/ListCategory";
     }
 
     @GetMapping("/NewCategory")
-    public String NewCategory(Model model) {
+    public String NewCategory(Model model, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("category", new Categories());
         return "admin/AddCategory";
     }
@@ -117,6 +133,7 @@ public class ManageCategoryController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "add new category successfully");
         return "redirect:/admin/ListCategory";
     }
 }

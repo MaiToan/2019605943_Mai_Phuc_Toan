@@ -3,6 +3,9 @@ package com.datn.maiphuctoandatn.controller.admin;
 import com.datn.maiphuctoandatn.config.FileUploadUtil;
 import com.datn.maiphuctoandatn.model.*;
 import com.datn.maiphuctoandatn.service.face.*;
+import com.datn.maiphuctoandatn.sort.PriceComparator;
+import com.datn.maiphuctoandatn.sort.SoldComparator;
+import com.datn.maiphuctoandatn.sort.SoldDesComparator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,7 +42,7 @@ public class ManageProductController {
     ICategoryService categoryService;
 
     @GetMapping("/ListProducts")
-    public String ListProducts(Model model, HttpServletRequest request, @ModelAttribute("searchProduct") String searchProduct) {
+    public String ListProducts(Model model, HttpServletRequest request, @ModelAttribute("searchProduct") String searchProduct, @ModelAttribute("sortBySold") String sortBySold) {
         List<Product> ListProducts = new ArrayList<>();
         if ((Objects.equals(searchProduct, null) ||
                 Objects.equals(searchProduct, ""))) {
@@ -51,6 +54,18 @@ public class ManageProductController {
             String formatDate = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(product.getCreated_at());
             product.setCreateFormatDate(formatDate);
         }
+        if (!Objects.equals(sortBySold, null)) {
+            if (Objects.equals(sortBySold, "asc")) {
+                ListProducts.sort(new SoldComparator());
+            }else if (Objects.equals(sortBySold, "desc")){
+                ListProducts.sort(new SoldDesComparator());
+            }
+        }
+        User user = (User) request.getSession().getAttribute("session_admin");
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        model.addAttribute("user", user);
         model.addAttribute("searchProduct", searchProduct);
         model.addAttribute("products", ListProducts);
         return "admin/ListProducts";
@@ -92,7 +107,13 @@ public class ManageProductController {
         }
         if (!comments.isEmpty())
             AvgRate /= comments.size();
-
+        String price = String.format("%.1f", product.getPrice()-product.getSale());
+        product.setUnitPrice(price);
+        User user = (User) request.getSession().getAttribute("session_admin");
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        model.addAttribute("user", user);
         model.addAttribute("product", product);
         model.addAttribute("comments", comments);
         model.addAttribute("authors", authors);
@@ -110,10 +131,11 @@ public class ManageProductController {
     }
 
     @PostMapping("/delete-product")
-    public String DeleteProduct(Model model, @ModelAttribute("id") Long id) {
+    public String DeleteProduct(Model model, @ModelAttribute("id") Long id, HttpServletRequest request) {
         Product product = productService.getProductById(id);
         product.setLoevm("1");
         productService.deleteProduct(product);
+        request.getSession().setAttribute("noti_message", "Delete product successfully");
         return "redirect:/admin/ListProducts";
     }
 
@@ -139,6 +161,8 @@ public class ManageProductController {
         if (authorCard == null) {
             authorCard = new ArrayList<>();
         }
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("product", product);
         model.addAttribute("categoriesList", categoriesList);
         model.addAttribute("authorList", authorList);
@@ -223,6 +247,7 @@ public class ManageProductController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "update product successfully");
         return "redirect:/admin/DetailProduct/" + product.getId();
     }
     @GetMapping("/NewProduct")
@@ -242,6 +267,8 @@ public class ManageProductController {
         if (authorCard == null) {
             authorCard = new ArrayList<>();
         }
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("categoriesList", categoriesList);
         model.addAttribute("authorList", authorList);
         model.addAttribute("authorCard", authorCard);
@@ -259,6 +286,7 @@ public class ManageProductController {
         }
         List<Author> authorList = (List<Author>) request.getSession().getAttribute("author-product");
         product.setLoevm("0");
+        if (product.getSale() == null) product.setSale(0.0);
         product.setProductSold(0);
         productService.saveProduct(product, authorList);
         if (!CheckFile.isEmpty()) {
@@ -266,6 +294,7 @@ public class ManageProductController {
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         }
+        request.getSession().setAttribute("noti_message", "add new product successfully");
         return "redirect:/admin/ListProducts";
     }
 
@@ -277,6 +306,7 @@ public class ManageProductController {
        else comment.setTopComment(1);
        commetService.saveData(comment);
        Long id_pro = (Long) request.getSession().getAttribute("id_pro");
+        request.getSession().setAttribute("noti_message", "add top comment successfully");
         return "redirect:/admin/DetailProduct/"+id_pro;
     }
 

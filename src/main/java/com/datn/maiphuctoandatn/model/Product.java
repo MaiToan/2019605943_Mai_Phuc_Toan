@@ -69,7 +69,7 @@ public class Product {
     @Column(name = "loevm", length = 1)
     public String Loevm;
 
-    @Column(name = "description", length = 500)
+    @Column(name = "description", length = 1000)
     public String Description;
 
     @Column(name = "product_number")
@@ -79,6 +79,7 @@ public class Product {
     public Integer ProductSold;
 
     public String CreateFormatDate;
+    public String UnitPrice ;
 
     @CreationTimestamp
     @Column(name = "created_at")

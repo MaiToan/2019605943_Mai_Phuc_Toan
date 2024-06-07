@@ -43,6 +43,14 @@ public class ManageUsersController {
         } else if (sortOrder.equals("desc")) {
             ListUser.sort(new OrderComparatorDes());
         }
+        for (User user : ListUser) {
+            if (Objects.equals(user.getRole(), "ROLE_ADMIN")){
+                ListUser.remove(user);
+                break;
+            }
+        }
+        User user = (User) request.getSession().getAttribute("session_admin");
+        model.addAttribute("user", user);
         model.addAttribute("searchUser", searchUser);
         model.addAttribute("users", ListUser);
         return "admin/ListUser";
@@ -54,7 +62,11 @@ public class ManageUsersController {
         User user = userService.findUserByID(id);
         Date dateTime = new Date(user.getCreated_at().getTime());
         List<Order> orders = orderService.findOrderByUser(user);
-
+        User userProfile = (User) request.getSession().getAttribute("session_admin");
+        String message = (String) request.getSession().getAttribute("noti_message");
+        request.getSession().setAttribute("noti_message", null);
+        model.addAttribute("noti_message", message);
+        model.addAttribute("user", userProfile);
         model.addAttribute("User", user);
         model.addAttribute("dateTime", dateTime);
         model.addAttribute("orders", orders);
@@ -66,6 +78,7 @@ public class ManageUsersController {
         User getUserDB = userService.findUserByID(id);
         getUserDB.setActive(user.getActive());
         userService.updateUser(getUserDB);
+        request.getSession().setAttribute("noti_message", "changed active user successfully");
         return "redirect:/admin/UserDetail/"+id;
     }
 }

@@ -64,7 +64,10 @@ public class AuthorController {
         Integer SizeProduct = (Integer) request.getSession().getAttribute("myCartNum");
         List<Categories> categories = categoryService.getThreeCategories();
 
-
+        for (Product product : LsProduct) {
+            String price = String.format("%.1f", product.getPrice()-product.getSale());
+            product.setUnitPrice(price);
+        }
         model.addAttribute("store", store);
         model.addAttribute("size_cart", SizeProduct);
         model.addAttribute("user", user);

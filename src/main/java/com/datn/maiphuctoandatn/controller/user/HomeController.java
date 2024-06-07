@@ -48,6 +48,10 @@ public class HomeController {
         if (lsProduct.size() > 4){
             lsProduct = lsProduct.subList(0, 4);
         }
+        for (Product product : lsProduct) {
+            String price = String.format("%.1f", product.getPrice()-product.getSale());
+            product.setUnitPrice(price);
+        }
         Integer SizeProduct = (Integer) request.getSession().getAttribute("myCartNum");
         String message = (String) request.getSession().getAttribute("noti_message" );
         request.getSession().setAttribute("noti_message", null );

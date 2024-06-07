@@ -52,6 +52,10 @@ public class ProductController {
         List<Categories> categoriesThree = categoryService.getThreeCategories();
 
         List<Categories> Categories = categoryService.getAll();
+        for (Product product : LsProduct) {
+            String price = String.format("%.1f", product.getPrice()-product.getSale());
+            product.setUnitPrice(price);
+        }
         List<Author> authors = authorService.getAllAuthors();
         model.addAttribute("store", store);
         model.addAttribute("user", user);
@@ -90,7 +94,10 @@ public class ProductController {
         List<Categories> categories = categoryService.getThreeCategories();
 
 
-
+        for (Product product_item : lsTop10) {
+            String price = String.format("%.1f", product_item.getPrice()-product_item.getSale());
+            product_item.setUnitPrice(price);
+        }
         Favorite favorite = new Favorite() ;
         if (user != null)
             favorite = favoriteService.getFavoriteByUserProduct(id, user.getId());
@@ -129,7 +136,8 @@ public class ProductController {
         }
         if (!comments.isEmpty())
             AvgRate /= comments.size();
-
+        String price = String.format("%.1f", product.getPrice()-product.getSale());
+        product.setUnitPrice(price);
         model.addAttribute("url", "/DetailProduct/" + id);
         model.addAttribute("store", store);
         model.addAttribute("size_cart", SizeProduct);
